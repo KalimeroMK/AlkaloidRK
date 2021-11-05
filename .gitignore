@@ -1,0 +1,10 @@
+# Project exclude paths
+/node_modules/
+/.env
+/.idea
+/vendor
+.idea
+.phpintel
+.env
+# Project exclude paths
+/storage/
