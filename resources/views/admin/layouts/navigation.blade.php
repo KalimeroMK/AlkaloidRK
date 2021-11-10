@@ -35,55 +35,55 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{ Route::currentRouteNamed('ads.index') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('ads.index') }}">
-                        <i class="material-icons">border_clear</i>
-                        <span class="title">{{trans('messages.ads_section')}}</span>
-                    </a>
-                </li>
+{{--                <li class="nav-item {{ Route::currentRouteNamed('ads.index') ? 'active' : '' }}">--}}
+{{--                    <a class="nav-link" href="{{ route('ads.index') }}">--}}
+{{--                        <i class="material-icons">border_clear</i>--}}
+{{--                        <span class="title">{{trans('messages.ads_section')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
-                <li class="nav-item {{ Route::currentRouteNamed('statistics') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{route('statistics')}}">
-                        <i class="material-icons">bar_chart</i>
-                        <span class="title">{{trans('messages.statistics')}}</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Route::currentRouteNamed('roles.index') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{route('roles.index')}}">
-                        <i class="material-icons">lock</i>
-                        <span class="title">{{trans('messages.user_roles')}}</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Route::currentRouteNamed('settings.index') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('settings.index') }}">
-                        <i class="material-icons">settings</i>
-                        <span class="title">{{trans('messages.settings')}}</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Route::currentRouteNamed('activity') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{route('activity')}}">
-                        <i class="material-icons">biotech</i>
-                        <span class="title">{{trans('messages.log')}}</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Route::currentRouteNamed('laravelblocker::blocker.index') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{route('laravelblocker::blocker.index')}}">
-                        <i class="material-icons">privacy_tip</i>
-                        <span class="title">{{trans('messages.blocker')}}</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Route::currentRouteNamed('translation') ? 'active' : '' }}">
-                    <a class="nav-link" href="/translations">
-                        <i class="material-icons">language</i>
-                        <span class="title">{{trans('messages.translations')}}</span>
-                    </a>
-                </li>
-                <li class="nav-item {{ Route::currentRouteNamed('languages') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('languages.index') }}">
-                        <i class="material-icons">flag</i>
-                        <span class="title">{{trans('messages.language')}}</span>
-                    </a>
-                </li>
+{{--                <li class="nav-item {{ Route::currentRouteNamed('statistics') ? 'active' : '' }}">--}}
+{{--                    <a class="nav-link" href="{{route('statistics')}}">--}}
+{{--                        <i class="material-icons">bar_chart</i>--}}
+{{--                        <span class="title">{{trans('messages.statistics')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item {{ Route::currentRouteNamed('roles.index') ? 'active' : '' }}">--}}
+{{--                    <a class="nav-link" href="{{route('roles.index')}}">--}}
+{{--                        <i class="material-icons">lock</i>--}}
+{{--                        <span class="title">{{trans('messages.user_roles')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item {{ Route::currentRouteNamed('settings.index') ? 'active' : '' }}">--}}
+{{--                    <a class="nav-link" href="{{ route('settings.index') }}">--}}
+{{--                        <i class="material-icons">settings</i>--}}
+{{--                        <span class="title">{{trans('messages.settings')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item {{ Route::currentRouteNamed('activity') ? 'active' : '' }}">--}}
+{{--                    <a class="nav-link" href="{{route('activity')}}">--}}
+{{--                        <i class="material-icons">biotech</i>--}}
+{{--                        <span class="title">{{trans('messages.log')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item {{ Route::currentRouteNamed('laravelblocker::blocker.index') ? 'active' : '' }}">--}}
+{{--                    <a class="nav-link" href="{{route('laravelblocker::blocker.index')}}">--}}
+{{--                        <i class="material-icons">privacy_tip</i>--}}
+{{--                        <span class="title">{{trans('messages.blocker')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item {{ Route::currentRouteNamed('translation') ? 'active' : '' }}">--}}
+{{--                    <a class="nav-link" href="/translations">--}}
+{{--                        <i class="material-icons">language</i>--}}
+{{--                        <span class="title">{{trans('messages.translations')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--                <li class="nav-item {{ Route::currentRouteNamed('languages') ? 'active' : '' }}">--}}
+{{--                    <a class="nav-link" href="{{ route('languages.index') }}">--}}
+{{--                        <i class="material-icons">flag</i>--}}
+{{--                        <span class="title">{{trans('messages.language')}}</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
             </ul>
         </div>
     </div>
