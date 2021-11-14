@@ -42,7 +42,8 @@
     "laravel/socialite": "^5.1",
     "laravel/legacy-factories": "^1.1",
     "laravel/helpers": "^1.4",
-    "orangehill/iseed": "^3.0"
+    "orangehill/iseed": "^3.0",
+    "spatie/laravel-honeypot": "^4.0"
   },
   "require-dev": {
     "symfony/css-selector": "~3.1",

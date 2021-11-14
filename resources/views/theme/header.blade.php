@@ -39,7 +39,7 @@
                     </li>
                     <li><a href="category.html">Shop</a>
                     </li>
-                    <li><a href="contact.html">Contact</a>
+                    <li><a href="{{ route('contact') }}">Contact</a>
                     </li>
                 </ul>
                 <a href="index.html#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
