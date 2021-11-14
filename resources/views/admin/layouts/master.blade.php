@@ -9,7 +9,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8"/>
-    <title>Ogledalo Web Admin</title>
+    <title>Web Admin</title>
 @include('feed::links')
 <!--move this line code to front end blade -->
 {{--@include('cookieConsent::admin.layouts.master')--}}

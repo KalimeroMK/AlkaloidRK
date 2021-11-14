@@ -1,18 +1,17 @@
 <?php
 
+    namespace App\Http\Requests;
 
-namespace App\Http\Requests;
-
-trait CanAuthorise
-{
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    : bool
+    trait CanAuthorise
     {
-        return true;
+        /**
+         * Determine if the user is authorized to make this request.
+         *
+         * @return bool
+         */
+        public function authorize(): bool
+    
+        {
+            return true;
+        }
     }
-}

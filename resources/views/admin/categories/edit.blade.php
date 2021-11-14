@@ -8,7 +8,7 @@
                 <div class="card-header card-header-primary">
                     <h4 class="card-title "> {{trans('messages.ads_section')}}</h4>
                     <p class="card-category"><a href="{{ route('dashboard')}}">{{trans('messages.home')}}</a> -> <a
-                                href="{{route('ads.index')}}">{{trans('messages.ads_section')}}</a></p>
+                                href="{{route('categories.index')}}">{{trans('messages.categories')}}</a></p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

@@ -67,7 +67,7 @@ return [
     'ad_updated_success' => 'Ad updated successfully',
     'manage_ads' => 'Manage Ad',
     'all_ads' => 'All Ad',
-    'ads' => 'Ad',
+    'slider' => 'Ad',
     'edit_ad' => 'Edit Ad',
     'create_new_ad' => 'Create New Ad',
     'code' => 'Code',

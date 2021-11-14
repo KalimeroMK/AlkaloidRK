@@ -1,7 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+    namespace App\Http\Controllers;
 
-class HomeController extends Controller
-{
-}
+    use App\Models\Slider;
+
+    class HomeController extends Controller
+    {
+        public function index()
+        {
+            $sliders = Slider ::all() -> take(3);
+            return view('theme.index', compact('sliders'));
+        }
+    }
+
