@@ -147,6 +147,7 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Cohensive\Embed\EmbedServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,

@@ -9,12 +9,17 @@
                 @method('post')
                 @csrf
                 @endif
-                <div class="form-group">
-                    <label for="code" class="col-sm-3 control-label">{{ trans('messages.ad_code') }}</label>
-                    <div class="col-sm-8">
-                        <textarea id="code" name="title">{{ old('title', $slider->title ?? null) }}</textarea>
+                <div class="form-group row">
+                    <label for="code" class="col-sm-3 control-label">{{ trans('messages.title') }}</label>
+                    <div class="col-8">
+                        <input id="name" class="form-control" type="text" name="title"
+                               placeholder="{{ trans('messages.title') }}"
+                               value="{{ old('title', $slider->title ?? null) }}"/>
+                        <input id="name" class="form-control" type="text" name="url"
+                               placeholder="{{ trans('messages.url') }}"
+                               value="{{ old('title', $slider->url ?? null) }}"/>
                     </div>
-                    <div class="fileinput text-center fileinput-new col-12" data-provides="fileinput">
+                    <div class="fileinput text-center fileinput-new col-4" data-provides="fileinput">
                         <div class="fileinput-new thumbnail img-circle">
                             <img src="@if(empty($post->featured_image)){{ asset('images/image_placeholder.jpg')}}@else {{ old('featured_image', $post->imageUrl ?? null) }}@endif"
                                  alt="image">

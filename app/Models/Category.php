@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Models;
+    namespace App\Models;
 
-use App\Traits\ClearsResponseCache;
-use Eloquent;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
-use Kalnoy\Nestedset\Collection;
-use Kalnoy\Nestedset\NodeTrait;
-use Kalnoy\Nestedset\QueryBuilder;
+    use App\Traits\ClearsResponseCache;
+    use Eloquent;
+    use Illuminate\Database\Eloquent\Builder;
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+    use Illuminate\Database\Eloquent\Relations\HasMany;
+    use Illuminate\Support\Carbon;
+    use Kalnoy\Nestedset\Collection;
+    use Kalnoy\Nestedset\NodeTrait;
+    use Kalnoy\Nestedset\QueryBuilder;
 
-/**
+    /**
  * App\Models\Category
  *
  * @property int $id
@@ -94,85 +94,96 @@ use Kalnoy\Nestedset\QueryBuilder;
  * @method static QueryBuilder|Category withDepth(string $as = 'depth')
  * @method static QueryBuilder|Category withoutRoot()
  */
-class Category extends Model
-{
-    use ClearsResponseCache;
-    use NodeTrait;
-    use HasFactory;
-
-    protected $table = 'categories';
-    protected $fillable = ['title', 'slug', 'parent_id'];
-
-    /**
-     * @return string
-     */
-    public static function getTree()
+    class Category extends Model
     {
-        $categories = self::get()->toTree();
-        $traverse = function ($categories, $prefix = '') use (&$traverse, &$allCats) {
+        use ClearsResponseCache;
+        use NodeTrait;
+        use HasFactory;
+
+        protected $table = 'categories';
+        protected $fillable = ['title', 'slug', 'parent_id'];
+
+        /**
+         * @return string
+         */
+        public static function getTree()
+        {
+            $categories = self::get()->toTree();
+            $traverse = function($categories, $prefix = '') use (&$traverse, &$allCats) {
+                foreach ($categories as $category) {
+                    $allCats[] = ["title" => $prefix . ' ' . $category->title, "id" => $category->id];
+                    $traverse($category->children, $prefix . '-');
+                }
+                return $allCats;
+            };
+            return $traverse($categories);
+        }
+
+        /**
+         * @return string
+         */
+        public static function getList(): string
+        {
+            $categories = self::get()->toTree();
+            $lists = '<li class="list-unstyled">';
             foreach ($categories as $category) {
-                $allCats[] = ["title" => $prefix.' '.$category->title, "id" => $category->id];
-                $traverse($category->children, $prefix.'-');
+                $lists .= self::renderNodeHP($category);
             }
-            return $allCats;
-        };
-        return $traverse($categories);
-    }
-
-    /**
-     * @return string
-     */
-    public static function getList(): string
-    {
-        $categories = self::get()->toTree();
-        $lists = '<li class="list-unstyled">';
-        foreach ($categories as $category) {
-            $lists .= self::renderNodeHP($category);
+            $lists .= "</li>";
+            return $lists;
         }
-        $lists .= "</li>";
-        return $lists;
-    }
 
-    /**
-     * @param $node
-     * @return string
-     */
-    public static function renderNodeHP($node): string
-    {
-        $list = '<li class="dropdown-item"><a class="nav-link" href="/categories/'.$node->slug.'">'.$node->title.'</a>';
-        if ($node->children()->count() > 0) {
-            $list .= '<ul class="dropdown-menu">';
-            foreach ($node->children as $child) {
-                $list .= self::renderNodeHP($child);
+        /**
+         * @param $node
+         * @return string
+         */
+        public static function renderNodeHP($node): string
+        {
+            $list = '<li class="dropdown-item"><a class="nav-link" href="/categories/' . $node->slug . '">' . $node->title . '</a>';
+            if ($node->children()->count() > 0) {
+                $list .= '<ul class="dropdown-menu">';
+                foreach ($node->children as $child) {
+                    $list .= self::renderNodeHP($child);
+                }
+                $list .= "</ul>";
             }
-            $list .= "</ul>";
+            $list .= "</li>";
+            return $list;
         }
-        $list .= "</li>";
-        return $list;
-    }
 
+        /**
+         * @return HasMany
+         */
+        public function post(): HasMany
+        {
+            return $this->hasMany(Post::class, 'category_id');
+        }
 
-    /**
-     * @return HasMany
-     */
-    public function post(): HasMany
-    {
-        return $this->hasMany(Post::class, 'category_id');
-    }
+        /**
+         * @return BelongsToMany
+         */
+        public function posts(): BelongsToMany
+        {
+            return $this->belongsToMany(Post::class);
+        }
 
-    /**
-     * @return BelongsToMany
-     */
-    public function posts(): BelongsToMany
-    {
-        return $this->belongsToMany(Post::class);
-    }
+        /**
+         * @return BelongsToMany
+         */
+        public function language(): BelongsToMany
+        {
+            return $this->belongsToMany(Language::class)->withPivot('title');
+        }
 
-    /**
-     * @return BelongsToMany
-     */
-    public function language(): BelongsToMany
-    {
-        return $this->belongsToMany(Language::class)->withPivot('title');
+        /**
+         * @return string
+         */
+        public function getParentsNames()
+        {
+            if ($this->parent) {
+                return $this->parent->getParentsNames();
+            } else {
+                return $this->title;
+            }
+        }
     }
-}

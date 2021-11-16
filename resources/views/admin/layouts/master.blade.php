@@ -36,7 +36,7 @@
 <body class="">
 
 @include('admin.layouts.header')
-
+@include('admin.partials.notify')
 <!-- BEGIN CONTAINER -->
 @include('admin.layouts.navigation')
 

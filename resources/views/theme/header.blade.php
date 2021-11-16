@@ -8,11 +8,7 @@
                     <div class="social-top">
                         <a href="index.html#"><span class="uk-icon-small uk-icon-hover uk-icon-facebook"></span></a>
                         <a href="index.html#"><span class="uk-icon-small uk-icon-hover uk-icon-twitter"></span></a>
-                        <a href="index.html#"><span class="uk-icon-small uk-icon-hover uk-icon-google"></span></a>
-                        <a href="index.html#"><span class="uk-icon-small uk-icon-hover uk-icon-pinterest"></span></a>
-                        <a href="index.html#"><span class="uk-icon-small uk-icon-hover uk-icon-youtube"></span></a>
                         <a href="index.html#"><span class="uk-icon-small uk-icon-hover uk-icon-instagram"></span></a>
-                        <a href="index.html#"><span class="uk-icon-small uk-icon-hover uk-icon-flickr"></span></a>
                     </div>
                 </div>
             </div>
@@ -32,17 +28,17 @@
 
                 <ul class="uk-navbar-nav uk-hidden-small">
                     <li class="uk-parent uk-active" data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true"
-                        aria-expanded="false"><a href="index.html">Home</a></li>
+                        aria-expanded="false"><a href="/">Home</a></li>
                     <li data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a
-                                href="about.html">About</a></li>
+                                href="{{ route('about_us') }}">About</a></li>
                     <li><a href="news.html">News</a>
                     </li>
                     <li><a href="category.html">Shop</a>
                     </li>
-                    <li><a href="{{ route('contact') }}">Contact</a>
+                    <li><a href="{{ route('contact') }}">@lang('partials.recruiter')</a>
                     </li>
                 </ul>
-                <a href="index.html#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
+                <a href="/#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
             </div>
         </nav>
     </div>

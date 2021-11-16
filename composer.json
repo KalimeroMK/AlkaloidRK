@@ -53,7 +53,8 @@
     "phpunit/phpunit": "^9",
     "fideloper/proxy": "^4.0",
     "barryvdh/laravel-ide-helper": "^2.6",
-    "laracasts/generators": "^2.0"
+    "laracasts/generators": "^2.0",
+    "laravel/telescope": "^4.6"
   },
   "autoload": {
     "classmap": [

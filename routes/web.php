@@ -9,6 +9,7 @@
     Route::get('/', [HomeController::class, 'index'])->name('indexFront');
     Route::get('contact', [HomeController::class, 'contact'])->name('contact');
     Route::post('contact', [HomeController::class, 'contactPost'])->name('contactPost')->middleware(ProtectAgainstSpam::class);
+    Route::get('about_us', [HomeController::class, 'aboutUs'])->name('about_us');
 
     Route::feeds();
     Route::get('sitemap', [Controller::class, 'sitemap']);

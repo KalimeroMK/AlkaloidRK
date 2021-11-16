@@ -37,7 +37,13 @@
                 <li class="nav-item {{ Route::currentRouteNamed('sliders.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('sliders.index')}}">
                         <i class="material-icons">image</i>
-                        <span class="title">{{trans('messages.slider')}}</span>
+                        <span class="title">Slider</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ Route::currentRouteNamed('youtube.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('youtube.index')}}">
+                        <i class="material-icons">image</i>
+                        <span class="title">YOUTUBE</span>
                     </a>
                 </li>
             </ul>
