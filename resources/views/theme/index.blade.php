@@ -480,11 +480,12 @@
                                         class="uk-width-large-1-2 uk-width-medium-1-1 uk-width-small-1-1 our-news-article"
                                         data-uk-grid-match="">
                                     <div class="img-wrap uk-cover-background uk-position-relative"
-                                         style="background-image: url(images/853d071dfa2f869fbd2a70dbcb3a8f5e.jpg); min-height: 280px;">
+                                         style="background-image: url({{ asset('theme/images/853d071dfa2f869fbd2a70dbcb3a8f5e.jpg') }}); min-height: 280px;">
 
 
-                                        <a href="news-single.html"></a>
-                                        <img class="uk-invisible" src="images/853d071dfa2f869fbd2a70dbcb3a8f5e.jpg"
+                                        <a href="#"></a>
+                                        <img class="uk-invisible"
+                                             src="{{ asset('theme/images/853d071dfa2f869fbd2a70dbcb3a8f5e.jpg') }}"
                                              alt="image">
 
                                     </div>
@@ -1733,8 +1734,7 @@
                                         </div>
                                     </div>
                                     <div class="uk-width-medium-8-10 uk-width-small-1-1 uk-push-1-10">
-                                        <iframe src="https://www.youtube.com/embed/_u20ZIIxwuc?rel=0&amp;showinfo=0"
-                                                allowfullscreen="" height="546" width="970"></iframe>
+                                        {!! $youtube->video_html !!}
                                     </div>
                                     <div class="uk-width-medium-1-1 uk-width-small-1-1 partners-slider">
                                         <div data-uk-slideset="{small: 2, medium: 5, large: 5}">

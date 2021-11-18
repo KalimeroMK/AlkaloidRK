@@ -1,15 +1,11 @@
 <?php
 
-    namespace App\Http\Requests\Gallery;
+    namespace App\Http\Requests\Tag;
 
     use App\Http\Requests\CanAuthorise;
     use Illuminate\Foundation\Http\FormRequest;
 
-    /**
-     * @property mixed title
-     * @property mixed parent_id
-     */
-    class Store extends FormRequest
+    class Update extends FormRequest
     {
         use CanAuthorise;
 
@@ -21,7 +17,7 @@
         public function rules(): array
         {
             return [
-//                'image' => 'image|required|max:30000' // max 10000kb
+                'title' => 'required',
             ];
         }
     }

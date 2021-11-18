@@ -25,7 +25,7 @@
         {
             return [
                 'title' => 'required|string',
-                'url'   => 'required|string',
+                'url'   => 'required|url',
 
             ];
         }

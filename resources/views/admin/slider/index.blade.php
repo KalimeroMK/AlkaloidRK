@@ -4,9 +4,9 @@
         <div class="content" style="margin-top: 7%">
             <div class="card">
                 <div class="card-header card-header-primary">
-                    <h4 class="card-title "> {{trans('messages.ads_section')}}</h4>
-                    <p class="card-category"><a href="{{ route('dashboard')}}">{{trans('messages.home')}}</a> -> <a
-                                href="{{route('sliders.index')}}">{{trans('messages.ads_section')}}</a></p>
+                    <h4 class="card-title "> {{ trans('messages.brands') }}</h4>
+                    <p class="card-category"><a href="{{ route('dashboard') }}">{{ trans('messages.home') }}</a><a
+                                href="{{ route('sliders.index') }}">->{{ trans('messages.brands') }}</a></p>
 
                 </div>
                 <div class="card-body">
@@ -14,10 +14,11 @@
                         <table class="table">
                             <thead class=" text-primary">
                             <tr>
-                                <th>{{trans('messages.id')}}</th>
-                                <th>{{trans('messages.title')}}</th>
-                                <th>{{trans('messages.edit')}}</th>
-                                <th>{{trans('messages.delete')}}</th>
+                                <th>@lang('messages.image')</th>
+                                <th>@lang('messages.title')</th>
+                                <th>@lang('messages.url')</th>
+                                <th>@lang('messages.edit')</th>
+                                <th>@lang('messages.delete')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -28,18 +29,31 @@
                                     </a>
                                 </div>
                             </div>
-                            @foreach($sliders as $slider)
+                            @foreach ($sliders as $slider)
                                 <tr>
-                                    <td> {{$slider->id}} </td>
-                                    <td> {{$slider->title}} </td>
-                                    <td><a href="{{ route('sliders.edit', $slider) }}"
-                                           class="btn btn-warning btn-sm">{{trans('messages.edit')}}</a>
+                                    <td>
+                                        <img src="{{ $slider->imageUrl }}" style="width:100px;"/>
                                     </td>
-                                    <td><a data-href="{{ route('sliders.destroy', $slider) }}" data-toggle="modal"
-                                           data-target="#confirm-delete"
-                                           class="btn btn-danger btn-sm">{{trans('messages.delete')}}</a></td>
+                                    <td>{{ $slider->title }}</td>
+                                    <td>{{ $slider->url }}</td>
+
+                                    <td><span class="time"><a href="{{ route('sliders.edit', $slider->id) }}"
+                                                              class="btn btn-info">@lang('partials.edit')</a></span>
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="{{route('sliders.destroy',$slider)}}">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger "
+                                                    data-id={{$slider['id']}} data-placement="bottom"
+                                                    title="Delete">@lang('partials.delete')
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
+
+
                             </tbody>
                         </table>
                     </div>
@@ -47,4 +61,4 @@
             </div>
         </div>
     </div>
-@stop
+@endsection

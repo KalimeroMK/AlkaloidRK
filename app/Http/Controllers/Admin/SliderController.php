@@ -22,10 +22,10 @@
          */
         public function __construct()
         {
-            $this -> middleware('permission:slider-list');
-            $this -> middleware('permission:slider-create', ['only' => ['create', 'store']]);
-            $this -> middleware('permission:slider-edit', ['only' => ['edit', 'update']]);
-            $this -> middleware('permission:slider-delete', ['only' => ['destroy']]);
+            $this->middleware('permission:slider-list');
+            $this->middleware('permission:slider-create', ['only' => ['create', 'store']]);
+            $this->middleware('permission:slider-edit', ['only' => ['edit', 'update']]);
+            $this->middleware('permission:slider-delete', ['only' => ['destroy']]);
         }
 
         /**
@@ -35,7 +35,7 @@
          */
         public function index()
         {
-            $sliders = Slider ::get();
+            $sliders = Slider::get();
             return view('admin.slider.index', compact('sliders'));
         }
 
@@ -58,23 +58,23 @@
          */
         public function store(StoreSliderRequest $request): RedirectResponse
         {
-            Slider ::create(
-                $request -> except('featured_image') + [
-                    'featured_image' => $this -> verifyAndStoreImage($request),
+            Slider::create(
+                $request->except('featured_image') + [
+                    'featured_image' => $this->verifyAndStoreImage($request),
                 ]
             );
-            return redirect() -> route('sliders.index');
+            return redirect()->route('sliders.index');
         }
 
         /**
          * Show the form for editing the specified resource.
          *
          * @param  Slider  $slider
-         * @return RedirectResponse
+         * @return Application|Factory|View
          */
-        public function edit(Slider $slider): RedirectResponse
+        public function edit(Slider $slider)
         {
-            return redirect() -> route('sliders.edit', compact('slider'));
+            return view('admin.slider.edit', compact('slider'));
         }
 
         /**
@@ -86,12 +86,12 @@
          */
         public function update(UpdateSliderRequest $request, Slider $slider): RedirectResponse
         {
-            Slider ::create(
-                $request -> except('featured_image') + [
-                    'featured_image' => $this -> verifyAndStoreImage($request),
+            Slider::create(
+                $request->except('featured_image') + [
+                    'featured_image' => $this->verifyAndStoreImage($request),
                 ]
             );
-            return redirect() -> back();
+            return redirect()->back();
         }
 
         /**
@@ -102,9 +102,9 @@
          */
         public function destroy(Slider $slider): RedirectResponse
         {
-            $slider -> delete();
-            Session ::flash('success_msg', trans('messages.tag_deleted_success'));
-            return redirect() -> back();
+            $slider->delete();
+            Session::flash('success_msg', trans('messages.tag_deleted_success'));
+            return redirect()->back();
         }
 
         /**

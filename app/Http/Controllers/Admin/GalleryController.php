@@ -6,7 +6,6 @@
     use App\Http\Requests\Gallery\Store;
     use App\Models\Gallery;
     use App\Models\Post;
-    use Exception;
     use File;
     use Illuminate\Contracts\Foundation\Application;
     use Illuminate\Contracts\View\Factory;
@@ -26,7 +25,7 @@
         public function index($id)
         {
             $post = Post::findOrFail($id);
-            $gallery = Gallery::wherePostId($post->id)->get();
+            $gallery = Gallery::wherePostId($id)->get();
             return view('admin.gallery.addGallery', compact('gallery', 'post'));
         }
 
@@ -69,15 +68,15 @@
         /**
          * Remove the specified resource from storage.
          *
-         * @param  Gallery  $gallery
+         * @param $id
          * @return RedirectResponse
-         * @throws Exception
          */
-        public function destroy(Gallery $gallery): RedirectResponse
+        public function destroy($id): RedirectResponse
         {
+            $gallery = Gallery::FindOrFail($id);
             $image = public_path() . '/uploads/images/gallery/' . $gallery->image;
             unlink($image);
             $gallery->delete();
-            return redirect()->back();
+            return back();
         }
     }

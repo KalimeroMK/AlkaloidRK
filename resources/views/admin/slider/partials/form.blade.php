@@ -21,7 +21,7 @@
                     </div>
                     <div class="fileinput text-center fileinput-new col-4" data-provides="fileinput">
                         <div class="fileinput-new thumbnail img-circle">
-                            <img src="@if(empty($post->featured_image)){{ asset('images/image_placeholder.jpg')}}@else {{ old('featured_image', $post->imageUrl ?? null) }}@endif"
+                            <img src="@if(empty($slider->featured_image)){{ asset('images/image_placeholder.jpg')}}@else {{ old('featured_image', $slider->imageUrl ?? null) }}@endif"
                                  alt="image">
                         </div>
                         <div class="fileinput-preview fileinput-exists thumbnail img-circle" style=""></div>
