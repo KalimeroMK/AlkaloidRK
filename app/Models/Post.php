@@ -18,55 +18,56 @@
     use Spatie\Feed\FeedItem;
 
     /**
-     * App\Models\Post
-     *
-     * @property int $id
-     * @property string $title
-     * @property string $slug
-     * @property int $featured
-     * @property string $type
-     * @property int $author_id
-     * @property string $description
-     * @property string $meta_description
-     * @property string $featured_image
-     * @property string $image_old
-     * @property int $views
-     * @property int $status
-     * @property Carbon|null $created_at
-     * @property Carbon|null $updated_at
-     * @property string $rating_desc
-     * @property-read User $author
-     * @property-read \Kalnoy\Nestedset\Collection|Category[] $categories
-     * @property-read int|null $categories_count
-     * @property-read Category $category
-     * @property-read string $image_url
-     * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
-     * @property-read int|null $notifications_count
-     * @property-read Collection|Tag[] $tags
-     * @property-read int|null $tags_count
-     * @property-read User $user
-     * @method static Builder|Post newModelQuery()
-     * @method static Builder|Post newQuery()
-     * @method static Builder|Post query()
-     * @method static Builder|Post whereAuthorId($value)
-     * @method static Builder|Post whereCreatedAt($value)
-     * @method static Builder|Post whereDescription($value)
-     * @method static Builder|Post whereFeatured($value)
-     * @method static Builder|Post whereFeaturedImage($value)
-     * @method static Builder|Post whereId($value)
-     * @method static Builder|Post whereImageOld($value)
-     * @method static Builder|Post whereMetaDescription($value)
-     * @method static Builder|Post whereRatingDesc($value)
-     * @method static Builder|Post whereSlug($value)
-     * @method static Builder|Post whereStatus($value)
-     * @method static Builder|Post whereTitle($value)
-     * @method static Builder|Post whereType($value)
-     * @method static Builder|Post whereUpdatedAt($value)
-     * @method static Builder|Post whereViews($value)
-     * @mixin Eloquent
-     * @property-read Collection|Language[] $language
-     * @property-read int|null $language_count
-     */
+ * App\Models\Post
+ *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property int $featured
+ * @property string $type
+ * @property int $author_id
+ * @property string $description
+ * @property string $meta_description
+ * @property string $featured_image
+ * @property string $image_old
+ * @property int $views
+ * @property int $status
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string $rating_desc
+ * @property-read User $author
+ * @property-read \Kalnoy\Nestedset\Collection|Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read Category $category
+ * @property-read string $image_url
+ * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @property-read Collection|Tag[] $tags
+ * @property-read int|null $tags_count
+ * @property-read User $user
+ * @method static Builder|Post newModelQuery()
+ * @method static Builder|Post newQuery()
+ * @method static Builder|Post query()
+ * @method static Builder|Post whereAuthorId($value)
+ * @method static Builder|Post whereCreatedAt($value)
+ * @method static Builder|Post whereDescription($value)
+ * @method static Builder|Post whereFeatured($value)
+ * @method static Builder|Post whereFeaturedImage($value)
+ * @method static Builder|Post whereId($value)
+ * @method static Builder|Post whereImageOld($value)
+ * @method static Builder|Post whereMetaDescription($value)
+ * @method static Builder|Post whereRatingDesc($value)
+ * @method static Builder|Post whereSlug($value)
+ * @method static Builder|Post whereStatus($value)
+ * @method static Builder|Post whereTitle($value)
+ * @method static Builder|Post whereType($value)
+ * @method static Builder|Post whereUpdatedAt($value)
+ * @method static Builder|Post whereViews($value)
+ * @mixin Eloquent
+ * @property-read Collection|Language[] $language
+ * @property-read int|null $language_count
+ * @method static \Database\Factories\PostFactory factory(...$parameters)
+ */
     class Post extends Model implements Feedable
     {
         use Notifiable;
@@ -153,7 +154,7 @@
                 return asset($this->image_old);
             }
 
-            return asset('/uploads/images/posts/medium/rsz_biblija.jpg');
+            return asset('theme/images/team/FLP_1848.png');
         }
 
         /**

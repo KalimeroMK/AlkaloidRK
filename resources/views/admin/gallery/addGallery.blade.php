@@ -38,7 +38,6 @@
                                     title="Delete">@lang('partials.delete')
                             </button>
                         </form>
-
                     @endforeach
                 </div>
             </div>

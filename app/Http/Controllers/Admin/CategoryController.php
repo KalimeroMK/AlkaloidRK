@@ -32,7 +32,7 @@
         /**
          * Display a listing of the resource.
          *
-         * @return Application|Factory|View
+         * @return Application|Factory|\Illuminate\Contracts\View\View|RedirectResponse
          */
         public function index()
         {

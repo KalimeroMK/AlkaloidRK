@@ -6,9 +6,11 @@
     use App\Http\Controllers\Admin\LanguageController;
     use App\Http\Controllers\Admin\PostController;
     use App\Http\Controllers\Admin\RoleController;
+    use App\Http\Controllers\Admin\ScoreController;
     use App\Http\Controllers\Admin\SettingController;
     use App\Http\Controllers\Admin\SliderController;
     use App\Http\Controllers\Admin\TagController;
+    use App\Http\Controllers\Admin\TeamController;
     use App\Http\Controllers\Admin\UserController;
     use App\Http\Controllers\Admin\YoutubeController;
 
@@ -24,3 +26,6 @@
     Route::resource('gallery', GalleryController::class);
     Route::resource('sliders', SliderController::class);
     Route::resource('youtube', YoutubeController ::class);
+    Route::resource('scores', ScoreController ::class);
+    Route::resource('teams', TeamController ::class);
+

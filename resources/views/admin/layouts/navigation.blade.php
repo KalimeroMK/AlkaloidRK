@@ -46,6 +46,18 @@
                         <span class="title">YOUTUBE</span>
                     </a>
                 </li>
+                <li class="nav-item {{ Route::currentRouteNamed('scores.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('scores.index')}}">
+                        <i class="material-icons">score</i>
+                        <span class="title">Score</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ Route::currentRouteNamed('teams.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('teams.index')}}">
+                        <i class="material-icons">assignment_ind</i>
+                        <span class="title">Team</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

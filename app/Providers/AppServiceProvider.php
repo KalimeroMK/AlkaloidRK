@@ -5,10 +5,12 @@
     use App\Models\Category;
     use App\Models\Post;
     use App\Models\Tag;
+    use App\Models\Team;
     use App\Models\User;
     use App\Observers\CategoryObserver;
     use App\Observers\PostObserver;
     use App\Observers\TagObserver;
+    use App\Observers\TeamObserver;
     use App\Observers\UserObserver;
     use Illuminate\Support\ServiceProvider;
 
@@ -38,5 +40,6 @@
             User::observe(UserObserver::class);
             Tag::observe(TagObserver::class);
             Post::observe(PostObserver::class);
+            Team::observe(TeamObserver::class);
         }
     }

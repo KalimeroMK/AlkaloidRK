@@ -29,6 +29,7 @@
  * @method static Builder|Gallery whereUpdatedAt($value)
  * @mixin Eloquent
  * @property-read mixed $gallery_url
+ * @method static \Database\Factories\GalleryFactory factory(...$parameters)
  */
     class Gallery extends Model
     {

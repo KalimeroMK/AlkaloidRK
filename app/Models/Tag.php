@@ -32,6 +32,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Tag whereUpdatedAt($value)
  * @method static Builder|Tag whereViews($value)
  * @mixin Eloquent
+ * @method static \Database\Factories\TagFactory factory(...$parameters)
  */
 class Tag extends Model
 {

@@ -26,6 +26,6 @@
          */
         public function updated(Post $post)
         {
-            $post->slug = Str::slug(array_first($post->title));
+            $post->slug = Str::slug(array_first((array)$post->title));
         }
     }

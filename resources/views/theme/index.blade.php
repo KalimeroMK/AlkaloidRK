@@ -585,415 +585,38 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_2a195f12da9f3f36da06e6097be7e451">
-                                        <div class="player-article">
-                                            <div class="wrapper">
-                                                <div class="img-wrap">
-                                                    <div class="player-number"><span>21</span>
+                                    @foreach($teams as $team)
+                                        <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_2a195f12da9f3f36da06e6097be7e451">
+                                            <div class="player-article">
+                                                <div class="wrapper">
+                                                    <div class="img-wrap">
+                                                        <div class="player-number"><span>
+                                                                    {{ $team->birthday }}
+                                                                </span>
+                                                        </div>
+                                                        <div class="bio"><span><a
+                                                                        href="{{ route('player', $team->slug) }}">bio</a></span>
+                                                        </div>
+                                                        <a href="{{ route('player', $team->slug) }}">
+                                                            <img src="{{ $team->imageUrl }}" class="img-polaroid"
+                                                                 alt="Steven Webb" title="Steven Webb">
+                                                        </a>
                                                     </div>
-                                                    <div class="bio"><span><a href="player.html">bio</a></span>
+                                                    <div class="info">
+                                                        <div class="name">
+                                                            <h3>
+                                                                <a href="{{ route('player', $team->slug) }}"></a>
+                                                            </h3>
+                                                        </div>
+                                                        <div class="position"> @foreach($team->language as $type)
+                                                                {{ $type->pivot->position }}
+                                                            @endforeach
+                                                        </div>
                                                     </div>
-                                                    <a href="player.html">
-                                                        <img src="images/team/FLP_1848.png" class="img-polaroid"
-                                                             alt="Steven Webb" title="Steven Webb">
-                                                    </a>
-                                                    <ul class="socials">
-                                                        <li class="twitter">
-                                                            <a href="http://twitter.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="facebook">
-                                                            <a href="http://facebook.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="google-plus">
-                                                            <a href="https://plus.google.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="pinterest">
-                                                            <a href="https://www.pinterest.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="linkedin">
-                                                            <a href="https://www.linkedin.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="name">
-                                                        <h3>
-                                                            <a href="player.html">Steven Webb </a>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="position">DEFENDER</div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-
-                                    <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_22c19cd174143e3b4c7ef40ae23c5d1a">
-                                        <div class="player-article">
-                                            <div class="wrapper">
-                                                <div class="img-wrap">
-                                                    <div class="player-number">
-                                                        <span>19</span>
-                                                    </div>
-                                                    <div class="bio"><span><a href="player.html">bio</a></span>
-                                                    </div>
-                                                    <a href="player.html">
-                                                        <img src="images/team/FLP_1849.png" class="img-polaroid"
-                                                             alt="John Montgomery" title="John Montgomery">
-                                                    </a>
-                                                    <ul class="socials">
-                                                        <li class="twitter">
-                                                            <a href="http://twitter.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="facebook">
-                                                            <a href="http://facebook.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="google-plus">
-                                                            <a href="https://plus.google.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="pinterest">
-                                                            <a href="https://www.pinterest.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="linkedin">
-                                                            <a href="https://www.linkedin.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="name">
-                                                        <h3>
-                                                            <a href="player.html">John Montgomery </a>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="position">STRIKER</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_81747b4426a9882884c1f83eda78844f">
-                                        <div class="player-article">
-                                            <div class="wrapper">
-                                                <div class="img-wrap">
-                                                    <div class="player-number">
-                                                        <span>35</span>
-                                                    </div>
-                                                    <div class="bio"><span><a href="player.html">bio</a></span>
-                                                    </div>
-                                                    <a href="player.html">
-                                                        <img src="images/team/FLP_1850.png" class="img-polaroid"
-                                                             alt="Johnny Thompson" title="Johnny Thompson">
-                                                    </a>
-                                                    <ul class="socials">
-                                                        <li class="twitter">
-                                                            <a href="http://twitter.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="facebook">
-                                                            <a href="http://facebook.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="google-plus">
-                                                            <a href="https://plus.google.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="pinterest">
-                                                            <a href="https://www.pinterest.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="linkedin">
-                                                            <a href="https://www.linkedin.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="name">
-                                                        <h3><a href="player.html">Johnny Thompson</a></h3>
-                                                    </div>
-                                                    <div class="position">goalkeeper</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_2a195f12da9f3f36da06e6097be7e451">
-                                        <div class="player-article">
-                                            <div class="wrapper">
-                                                <div class="img-wrap">
-                                                    <div class="player-number"><span>07</span>
-                                                    </div>
-                                                    <div class="bio"><span><a href="player.html">bio</a></span>
-                                                    </div>
-                                                    <a href="player.html">
-                                                        <img src="images/team/FLP_1851.png" class="img-polaroid"
-                                                             alt="Benjamin Mendoza" title="Benjamin Mendoza">
-                                                    </a>
-                                                    <ul class="socials">
-                                                        <li class="twitter">
-                                                            <a href="http://twitter.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="facebook">
-                                                            <a href="http://facebook.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="google-plus">
-                                                            <a href="https://plus.google.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="pinterest">
-                                                            <a href="https://www.pinterest.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="linkedin">
-                                                            <a href="https://www.linkedin.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="name">
-                                                        <h3>
-                                                            <a href="player.html">Benjamin Mendoza </a>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="position">DEFENDER</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_22c19cd174143e3b4c7ef40ae23c5d1a">
-                                        <div class="player-article">
-                                            <div class="wrapper">
-                                                <div class="img-wrap">
-                                                    <div class="player-number"><span>47 </span>
-                                                    </div>
-                                                    <div class="bio"><span><a href="player.html">bio</a></span>
-                                                    </div>
-                                                    <a href="player.html">
-                                                        <img src="images/team/FLP_1852.png" class="img-polaroid"
-                                                             alt="Joe Perez" title="Joe Perez">
-                                                    </a>
-                                                    <ul class="socials">
-                                                        <li class="twitter">
-                                                            <a href="http://twitter.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="facebook">
-                                                            <a href="http://facebook.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="google-plus">
-                                                            <a href="https://plus.google.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="pinterest">
-                                                            <a href="https://www.pinterest.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="linkedin">
-                                                            <a href="https://www.linkedin.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="name">
-                                                        <h3>
-                                                            <a href="player.html">Joe Perez </a>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="position">STRIKER</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_4d957768dcc72908ab3b9e28dc867052">
-                                        <div class="player-article">
-                                            <div class="wrapper">
-                                                <div class="img-wrap">
-                                                    <div class="player-number"><span>23 </span>
-                                                    </div>
-                                                    <div class="bio"><span><a href="player.html">bio</a></span>
-                                                    </div>
-                                                    <a href="player.html">
-                                                        <img src="images/team/FLP_1853.png" class="img-polaroid"
-                                                             alt="Bobby Guerrero" title="Bobby Guerrero">
-                                                    </a>
-                                                    <ul class="socials">
-                                                        <li class="twitter">
-                                                            <a href="http://twitter.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="facebook">
-                                                            <a href="http://facebook.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="google-plus">
-                                                            <a href="https://plus.google.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="pinterest">
-                                                            <a href="https://www.pinterest.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="linkedin">
-                                                            <a href="https://www.linkedin.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="name">
-                                                        <h3>
-                                                            <a href="player.html">Bobby Guerrero </a>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="position">MIDFIELDER</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_2a195f12da9f3f36da06e6097be7e451">
-                                        <div class="player-article">
-                                            <div class="wrapper">
-                                                <div class="img-wrap">
-                                                    <div class="player-number"><span>14 </span>
-                                                    </div>
-                                                    <div class="bio"><span><a href="player.html">bio</a></span>
-                                                    </div>
-                                                    <a href="player.html">
-                                                        <img src="images/team/FLP_1854.png" class="img-polaroid"
-                                                             alt="Douglas Pain" title="Douglas Pain">
-                                                    </a>
-                                                    <ul class="socials">
-                                                        <li class="twitter">
-                                                            <a href="http://twitter.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="facebook">
-                                                            <a href="http://facebook.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="name">
-                                                        <h3>
-                                                            <a href="player.html">Douglas Pain </a>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="position">DEFENDER</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class=" uk-width-large-1-4 uk-width-medium-1-3 uk-width-small-1-2 player-item tt_22c19cd174143e3b4c7ef40ae23c5d1a">
-                                        <div class="player-article">
-                                            <div class="wrapper">
-                                                <div class="img-wrap">
-                                                    <div class="player-number"><span>36 </span>
-                                                    </div>
-                                                    <div class="bio"><span><a href="player.html">bio</a></span>
-                                                    </div>
-                                                    <a href="player.html">
-                                                        <img src="images/team/FLP_1855.png" class="img-polaroid"
-                                                             alt="Christopher Herrera" title="Christopher Herrera">
-                                                    </a>
-                                                    <ul class="socials">
-                                                        <li class="twitter">
-                                                            <a href="http://twitter.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="facebook">
-                                                            <a href="http://facebook.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="google-plus">
-                                                            <a href="https://plus.google.com/" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="pinterest">
-                                                            <a href="https://www.pinterest.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                        <li class="linkedin">
-                                                            <a href="https://www.linkedin.com" target="_blank"
-                                                               rel="nofollow">
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="name">
-                                                        <h3>
-                                                            <a href="player.html">Christopher Herrera</a>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="position">STRIKER</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    @endforeach
                                 </div>
                             </div>
 
@@ -1734,7 +1357,7 @@
                                         </div>
                                     </div>
                                     <div class="uk-width-medium-8-10 uk-width-small-1-1 uk-push-1-10">
-                                        {!! $youtube->video_html !!}
+                                        {!! $youtube->video_html ?? ''!!}
                                     </div>
                                     <div class="uk-width-medium-1-1 uk-width-small-1-1 partners-slider">
                                         <div data-uk-slideset="{small: 2, medium: 5, large: 5}">

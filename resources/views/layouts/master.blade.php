@@ -8,6 +8,10 @@
     <title>Alkaloid RK</title>
     <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
     <link href="images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <link href="{{ asset('theme/css/akslider.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('theme/css/donate.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('theme/css/theme.css') }}" rel="stylesheet" type="text/css"/>
@@ -25,6 +29,10 @@
     @yield('content')
     @include('theme.footer')
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="{{ asset('theme/js/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('theme/js/uikit.js') }}"></script>
 <script type="text/javascript" src="{{ asset('theme/js/SimpleCounter.js') }}"></script>
@@ -65,6 +73,7 @@
         }
     });
 </script>
+@yield('scripts')
 
 </body>
 

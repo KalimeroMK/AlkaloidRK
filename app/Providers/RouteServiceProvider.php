@@ -1,97 +1,97 @@
 <?php
 
-		namespace App\Providers;
+    namespace App\Providers;
 
-		use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-		use Illuminate\Support\Facades\Route;
+    use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+    use Illuminate\Support\Facades\Route;
 
-		class RouteServiceProvider extends ServiceProvider
-		{
-				/**
-				 *
-				 */
-				public const HOME = 'dashboard';
+    class RouteServiceProvider extends ServiceProvider
+    {
+        /**
+         *
+         */
+        public const HOME = 'dashboard';
 
-				/**
-				 * This namespace is applied to your controller routes.
-				 *
-				 * In addition, it is set as the URL generator's root namespace.
-				 *
-				 * @var string
-				 */
-				protected $namespace = 'App\Http\Controllers';
+        /**
+         * This namespace is applied to your controller routes.
+         *
+         * In addition, it is set as the URL generator's root namespace.
+         *
+         * @var string
+         */
+        protected $namespace = 'App\Http\Controllers';
 
-				/**
-				 * Define your route model bindings, pattern filters, etc.
-				 *
-				 * @return void
-				 */
-				public function boot()
-				{
-						//
+        /**
+         * Define your route model bindings, pattern filters, etc.
+         *
+         * @return void
+         */
+        public function boot()
+        {
+            //
 
-						parent ::boot();
-				}
+            parent::boot();
+        }
 
-				/**
-				 * Define the routes for the application.
-				 *
-				 * @return void
-				 */
-				public function map()
-				{
-						$this -> mapApiRoutes();
+        /**
+         * Define the routes for the application.
+         *
+         * @return void
+         */
+        public function map()
+        {
+            $this->mapApiRoutes();
 
-						$this -> mapAdminRoutes();
+            $this->mapAdminRoutes();
 
-						$this -> map2faRoutes();
+            $this->map2faRoutes();
 
-						$this -> mapWebRoutes();
-				}
+            $this->mapWebRoutes();
+        }
 
-				/**
-				 * Define the "api" routes for the application.
-				 *
-				 * These routes are typically stateless.
-				 *
-				 * @return void
-				 */
-				protected function mapApiRoutes()
-				{
-						Route ::prefix('api')
-								-> middleware('api')
-								-> group(base_path('routes/api.php'));
-				}
+        /**
+         * Define the "api" routes for the application.
+         *
+         * These routes are typically stateless.
+         *
+         * @return void
+         */
+        protected function mapApiRoutes()
+        {
+            Route::prefix('api')
+                ->middleware('api')
+                ->group(base_path('routes/api.php'));
+        }
 
-				/**
-				 * Define admin routes protected with auth middleware admin namespace used
-				 */
-				public function mapAdminRoutes()
-				{
-						Route ::middleware(['web', 'auth', '2fa', 'activity', 'checkblocked'])
-								-> group(base_path('routes/admin.php'));
-				}
+        /**
+         * Define admin routes protected with auth middleware admin namespace used
+         */
+        public function mapAdminRoutes()
+        {
+            Route::middleware(['web', 'auth', '2fa'])
+                ->group(base_path('routes/admin.php'));
+        }
 
-				/**
-				 * Define 2fa routes protected with auth middleware admin namespace used
-				 */
-				public function map2faRoutes()
-				{
-						Route ::middleware(['web', 'auth', 'activity', 'checkblocked'])
-								-> prefix('2fa')
-								-> group(base_path('routes/2fa.php'));
-				}
+        /**
+         * Define 2fa routes protected with auth middleware admin namespace used
+         */
+        public function map2faRoutes()
+        {
+            Route::middleware(['web', 'auth'])
+                ->prefix('2fa')
+                ->group(base_path('routes/2fa.php'));
+        }
 
-				/**
-				 * Define the "web" routes for the application.
-				 *
-				 * These routes all receive session state, CSRF protection, etc.
-				 *
-				 * @return void
-				 */
-				protected function mapWebRoutes()
-				{
-						Route ::middleware(['web', 'activity', 'checkblocked'])
-								-> group(base_path('routes/web.php'));
-				}
-		}
+        /**
+         * Define the "web" routes for the application.
+         *
+         * These routes all receive session state, CSRF protection, etc.
+         *
+         * @return void
+         */
+        protected function mapWebRoutes()
+        {
+            Route::middleware(['web'])
+                ->group(base_path('routes/web.php'));
+        }
+    }

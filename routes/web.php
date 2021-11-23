@@ -13,6 +13,10 @@
     Route::get('categories/{slug}', [HomeController::class, 'productCat'])->name('categories');
     Route::get('details/{slug}', [HomeController::class, 'postDetails'])->name('postDetails');
     Route::get('results', [HomeController::class, 'results'])->name('results');
+    Route::get('galleries/{slug}', [HomeController::class, 'gallery'])->name('galleries');
+    Route::get('galleries/details/{slug}', [HomeController::class, 'galleriesDetails'])->name('galleriesDetails');
+    Route::get('kl7/{slug}', [HomeController::class, 'kl7'])->name('kl7');
+    Route::get('player/{slug}', [HomeController::class, 'playerDetails'])->name('player');
 
     Route::feeds();
     Route::get('sitemap', [Controller::class, 'sitemap']);
@@ -21,3 +25,10 @@
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook']);
     Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+    Route::get(
+        '{locale}',
+        static function($locale) {
+            Session::put('locale', $locale);
+            return redirect()->back();
+        }
+    );

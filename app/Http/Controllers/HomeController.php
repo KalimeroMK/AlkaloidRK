@@ -8,15 +8,22 @@
     use App\Models\Gallery;
     use App\Models\Post;
     use App\Models\Slider;
+    use App\Models\Team;
     use App\Models\Youtube;
     use Illuminate\Contracts\Foundation\Application;
     use Illuminate\Contracts\View\Factory;
     use Illuminate\Contracts\View\View;
     use Illuminate\Http\RedirectResponse;
     use Illuminate\Support\Facades\Mail;
+    use Illuminate\Support\Facades\Session;
 
     class HomeController extends Controller
     {
+        public function lang()
+        {
+            return Session::get('locale');
+        }
+
         /**
          * @return Application|Factory|View
          */
@@ -24,7 +31,13 @@
         {
             $sliders = Slider::all()->take(3);
             $youtube = Youtube::get()->last();
-            return view('theme.index', compact('sliders', 'youtube'));
+            $teams = Team::with([
+                'language' => function($query) {
+                    $query->where('languages.code', $this->lang());
+                },
+            ])
+                ->paginate(8);
+            return view('theme.index', compact('sliders', 'youtube', 'teams'));
         }
 
         /**
@@ -83,13 +96,62 @@
                 ->where('id', '!=', $post->id) // So you won't fetch same product
                 ->take(4)->get();
             $sliders = Gallery::wherePostId($post->id)->get();
-            return view('theme.postDetails', compact('sliders', 'post', 'related', 'related', 'sliders'));
+            return view('theme.postDetails', compact('post', 'related', 'sliders'));
         }
 
+        /**
+         * @return Application|Factory|View
+         */
         public function results()
         {
             return view('theme.tabela');
         }
 
+        /**
+         * @param $slug
+         * @return Application|Factory|View
+         */
+        public function gallery($slug)
+        {
+            $category = Category::whereSlug($slug)->firstOrFail();
+            $posts = Post::whereHas('categories', static function($q) use ($category) {
+                $q->where('title', '=', $category->title);
+            })->paginate(12);
+            return view('theme.gallery', compact('category', 'posts'));
+        }
+
+        /**
+         * @param $slug
+         * @return Application|Factory|View
+         */
+        public function galleriesDetails($slug)
+        {
+            $post = Post::whereSlug($slug)->firstOrFail();
+            $sliders = Gallery::wherePostId($post->id)->get();
+            return view('theme.galleryDetails', compact('sliders', 'post'));
+        }
+
+        /**
+         * @param $slug
+         * @return Application|Factory|View
+         */
+        public function kl7($slug)
+        {
+            $category = Category::whereSlug($slug)->firstOrFail();
+            $posts = Post::whereHas('categories', static function($q) use ($category) {
+                $q->where('title', '=', $category->title);
+            })->paginate(12);
+            return view('theme.kl7', compact('category', 'posts'));
+        }
+
+        /**
+         * @param $slug
+         * @return Application|Factory|View
+         */
+        public function playerDetails($slug)
+        {
+            $team = Team::whereSlug($slug)->firstOrFail();
+            return view('theme.playerDetails', compact('team'));
+        }
     }
 

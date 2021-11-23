@@ -34,8 +34,6 @@
     "spatie/laravel-sitemap": "^6",
     "symfony/dom-crawler": "^5.1",
     "pragmarx/google2fa-laravel": "^1.4",
-    "jeremykenedy/laravel-logger": "^3.6",
-    "jeremykenedy/laravel-blocker": "^3.3",
     "laravel/slack-notification-channel": "^2.0",
     "unisharp/laravel-filemanager": "master",
     "spatie/laravel-cookie-consent": "^2.12",
