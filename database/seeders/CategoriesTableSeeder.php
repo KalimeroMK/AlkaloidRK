@@ -73,6 +73,17 @@
                         'created_at' => null,
                         'updated_at' => null,
                     ],
+                5 =>
+                    [
+                        'id'         => 6,
+                        'slug'       => 'news',
+                        'title'      => 'Vesti',
+                        'parent_id'  => null,
+                        '_lft'       => 1,
+                        '_rgt'       => 2,
+                        'created_at' => null,
+                        'updated_at' => null,
+                    ],
             ]);
         }
     }

@@ -58,8 +58,6 @@
         {
             $score = Score::create(
                 $request->except('team1', 'team2', 'team1logo', 'team2logo') + [
-//                    'team1logo' => $this->verifyAndStoreImage($request),
-//                    'team2logo' => $this->verifyAndStoreImage($request),
                 ]
             );
             $score->language()->attach($this->pivotData($request));
@@ -83,24 +81,27 @@
         /**
          * Update the specified resource in storage.
          *
-         * @param  \App\Http\Requests\UpdateScoreRequest  $request
+         * @param  UpdateScoreRequest  $request
          * @param  Score  $score
          * @return Response
          */
-        public function update(UpdateScoreRequest $request, Score $score)
+        public function update(UpdateScoreRequest $request, Score $score): Response
         {
-            //
+            $score->update($request->except('team1', 'team2', 'team1logo', 'team2logo'));
+            $score->language()->sync($this->pivotData($request), true);
+            $score->language()->attach($this->pivotData($request));
         }
 
         /**
          * Remove the specified resource from storage.
          *
          * @param  Score  $score
-         * @return Response
+         * @return RedirectResponse
          */
-        public function destroy(Score $score)
+        public function destroy(Score $score): RedirectResponse
         {
-            //
+            $score->delete();
+            return redirect()->back();
         }
 
         /**

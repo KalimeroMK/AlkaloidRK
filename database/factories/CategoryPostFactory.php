@@ -12,7 +12,7 @@
         public function definition(): array
         {
             return [
-                'category_id' => $this->faker->numberBetween(1, 5),
+                'category_id' => $this->faker->numberBetween(1, 6),
                 'post_id'     => $this->faker->numberBetween(1, 500),
 
             ];

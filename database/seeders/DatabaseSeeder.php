@@ -4,6 +4,7 @@
 
     use App\Models\CategoryPost;
     use App\Models\Gallery;
+    use App\Models\LanguagePost;
     use App\Models\Post;
     use App\Models\Tag;
     use Illuminate\Database\Eloquent\Model;
@@ -29,6 +30,7 @@
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
             CategoryPost::factory()->count(5000)->create();
             Gallery::factory()->count(5000)->create();
+            LanguagePost::factory()->count(500)->create();
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         }
     }

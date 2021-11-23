@@ -9,7 +9,8 @@
                     <div class="uk-panel">
                         <div class="uk-cover-background uk-position-relative head-wrap"
                              style="height: 290px; background-image: url('images/head-bg.jpg');">
-                            <img class="uk-invisible" src="images/head-bg.jpg" alt="image" height="290" width="1920">
+                            <img class="uk-invisible" src="{{ asset('theme/images/head-bg.jpg') }}" alt="image"
+                                 height="290" width="1920">
                             <div class="uk-position-cover uk-flex uk-flex-center head-title">
                                 <h1>Players</h1>
                             </div>
@@ -22,11 +23,12 @@
 
     <div class="uk-container uk-container-center alt">
         <ul class="uk-breadcrumb">
-            <li><a href="index.html">Home</a>
+            <li><a href="i/">Home</a>
             </li>
-            <li><a href="players.html">Players</a>
+            <li><a href="">Players</a>
             </li>
-            <li class="uk-active"><span>Christopher Herrera </span>
+            <li class="uk-active">
+                <span>@foreach($team->language as $lang)  {!!$lang->pivot->name ?? null!!}  {!!$lang->pivot->lastname ?? null!!}@endforeach</span>
             </li>
         </ul>
     </div>
@@ -48,9 +50,9 @@
                                     <div class="uk-grid">
                                         <div class="uk-width-5-12">
                                             <div class="avatar">
-                                                <img src="images/05af8f3689acbb6cff8e90e374ebc2b5.jpg"
+                                                <img src="{{ $team->imageUrl }}"
                                                      class="img-polaroid" alt="Christopher Herrera"
-                                                     title="Christopher Herrera">
+                                                     title="image">
                                             </div>
                                         </div>
                                         <div class="uk-width-1-12">
@@ -61,41 +63,19 @@
                                         <div class="uk-width-6-12">
                                             <div class="name">
                                                 <h2>
-                                                    Christopher Herrera
+                                                    @foreach($team->language as $lang)  {!!$lang->pivot->name ?? null!!}  {!!$lang->pivot->lastname ?? null!!}@endforeach
                                                 </h2>
                                             </div>
                                             <div class="wrap">
                                                 <ul class="info">
-                                                    <li><span>POSITION</span><span>STRIKER</span></li>
-                                                    <li><span>APPEARANCES</span><span>581</span></li>
-                                                    <li><span>GOALs</span><span>155</span></li>
-                                                    <li><span>YELLOW CARDS</span><span>15</span></li>
-                                                    <li><span>RED CARDS</span><span>3</span></li>
-                                                    <li><span>D.O.B</span><span>20/08/1985</span></li>
-                                                    <li><span>NATIONALITY</span><span>ENGLISH</span></li>
-                                                    <li><span>HEIGHT</span><span>2.0M</span></li>
-                                                    <li><span>WEIGHT</span><span>81 KG</span></li>
-                                                </ul>
-                                                <ul class="socials">
-                                                    <li class="twitter"><a href="http://twitter.com/" target="_blank"
-                                                                           rel="nofollow">
-                                                        </a>
+                                                    <li>
+                                                        <span>POSITION</span><span>@foreach($team->language as $lang)  {!!$lang->pivot->position ?? null!!} @endforeach</span>
                                                     </li>
-                                                    <li class="facebook"><a href="http://facebook.com/" target="_blank"
-                                                                            rel="nofollow">
-                                                        </a>
+                                                    <li>
+                                                        <span>D.O.B</span><span>@foreach($team->language as $lang)  {!!$lang->pivot->birday ?? null!!} @endforeach</span>
                                                     </li>
-                                                    <li class="google-plus"><a href="https://plus.google.com/"
-                                                                               target="_blank" rel="nofollow">
-                                                        </a>
-                                                    </li>
-                                                    <li class="pinterest"><a href="https://www.pinterest.com"
-                                                                             target="_blank" rel="nofollow">
-                                                        </a>
-                                                    </li>
-                                                    <li class="linkedin"><a href="https://www.linkedin.com"
-                                                                            target="_blank" rel="nofollow">
-                                                        </a>
+                                                    <li>
+                                                        <span>NATIONALITY</span><span>@foreach($team->language as $lang)  {!!$lang->pivot->nationality ?? null!!} @endforeach</span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -114,30 +94,7 @@
                                 <div class="uk-grid">
                                     <div class="uk-width-9-10 uk-push-1-10">
                                         <div class="player-total-info">
-                                            <p><strong>Aenean lobortis eu nibh eu euismod. In ullamcorper, velit sed
-                                                    tincidunt tempor, ante elit euismod magna, vel scelerisque odio
-                                                    velit nec arcu. Nulla dolor sapien, vehicula sit amet augue nec,
-                                                    consequat aliquet velit. Donec euismod interdum mauris id
-                                                    dapibus.</strong></p>
-                                            <p>Fusce mollis ante dolor, in tincidunt justo vehicula id. Lorem ipsum
-                                                dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi
-                                                tristique senectus et netus et malesuada fames ac turpis egestas. Nam
-                                                nec tortor sit amet metus vestibulum sagittis. Donec sed dignissim nisi.
-                                                Pellentesque ac dolor vestibulum, sollicitudin leo ac, pretium nulla.
-                                                Mauris sit amet mattis turpis, eu molestie lectus. Donec semper sem ac
-                                                dolor euismod vulputate. Quisque massa elit, viverra et euismod nec,
-                                                porta eget elit. Aliquam molestie tempus ex, ut iaculis tortor eleifend
-                                                ac. Aliquam id massa facilisis, iaculis orci et, ornare augue. Fusce
-                                                eget sollicitudin est. Fusce ultrices enim ut aliquam sollicitudin.</p>
-                                            <ul>
-                                                <li>Maecenas a nisl in turpis fermentum imperdiet;</li>
-                                                <li>Nullam at diam et odio consectetur fermentum;</li>
-                                                <li>Maecenas volutpat lacus quis sem congue egestas;</li>
-                                                <li>Quisque sit amet nunc quis quam tincidunt scelerisque;</li>
-                                                <li>Maecenas vestibulum ligula sed augue dictum, quis tincidunt nulla
-                                                    pellentesque;
-                                                </li>
-                                            </ul>
+                                            <p>@foreach($team->language as $lang)  {!! $lang->pivot->bio ?? null !!} @endforeach</p>
                                         </div>
                                     </div>
                                 </div>

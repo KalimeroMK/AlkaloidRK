@@ -37,7 +37,15 @@
                 },
             ])
                 ->paginate(8);
-            return view('theme.index', compact('sliders', 'youtube', 'teams'));
+            $category = Category::whereSlug('news')->firstOrFail();
+            $news = Post::whereHas('categories', static function($q) use ($category) {
+                $q->where('title', '=', $category->title);
+            })->with([
+                'language' => function($query) {
+                    $query->where('languages.code', $this->lang());
+                },
+            ])->take(2)->get();
+            return view('theme.index', compact('sliders', 'youtube', 'teams', 'news'));
         }
 
         /**
@@ -150,8 +158,20 @@
          */
         public function playerDetails($slug)
         {
-            $team = Team::whereSlug($slug)->firstOrFail();
-            return view('theme.playerDetails', compact('team'));
+            $team = Team::whereSlug($slug)->with([
+                'language' => function($query) {
+                    $query->where('languages.code', $this->lang());
+                },
+            ])->firstOrFail();
+
+            $related = Team::with([
+                'language' => function($query) {
+                    $query->where('languages.code', $this->lang());
+                },
+            ])
+                ->where('id', '!=', $team->id) // So you won't fetch same product
+                ->take(8)->get();
+            return view('theme.playerDetails', compact('team', 'related'));
         }
     }
 

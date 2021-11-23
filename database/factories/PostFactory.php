@@ -13,11 +13,9 @@
         public function definition(): array
         {
             return [
-                'title'            => $this->faker->word,
                 'slug'             => $this->faker->slug,
                 'featured'         => $this->faker->randomNumber(),
                 'type'             => $this->faker->word,
-                'description'      => $this->faker->text,
                 'meta_description' => $this->faker->text,
                 'views'            => $this->faker->randomNumber(),
                 'status'           => 1,
