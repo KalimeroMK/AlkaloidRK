@@ -1,13 +1,18 @@
 @extends('layouts.master')
 @section('content')
-    <div id="PlaceToPutTable">
+    {{--    <div class="container">--}}
+    {{--        <iframe id="frameID" src="https://macedoniahandball.com.mk/tabelirezultati/" width="100%"--}}
+    {{--                height="900">--}}
+    {{--        </iframe>--}}
+    {{--    </div>--}}
 
-        <iframe id="iframe" src="https://macedoniahandball.com.mk/tabelirezultati/" style="display:hidden;"></iframe>
-    </div>
 
-    <script>
-        const iframe = document.getElementById("iframe");
-        const div = document.getElementById("PlaceToPutTable");
-        div.innerHTML = iframe.contentWindow.document.getElementById("elementor-tab-title-635").innerHTML;
-    </script>
+    {{--    <a href="#" onclick=--}}
+    {{--    "getIframeContent('frameID');">--}}
+    {{--        Get the content of Iframe--}}
+    {{--    </a>--}}
+@endsection
+
+@section('scripts')
+
 @endsection

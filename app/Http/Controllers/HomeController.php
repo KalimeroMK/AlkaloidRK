@@ -148,7 +148,11 @@
             $category = Category::whereSlug($slug)->firstOrFail();
             $posts = Post::whereHas('categories', static function($q) use ($category) {
                 $q->where('title', '=', $category->title);
-            })->paginate(12);
+            })->with([
+                'language' => function($query) {
+                    $query->where('languages.code', $this->lang());
+                },
+            ])->paginate(12);
             return view('theme.kl7', compact('category', 'posts'));
         }
 
