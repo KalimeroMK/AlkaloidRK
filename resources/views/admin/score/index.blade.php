@@ -14,9 +14,9 @@
                         <table class="table">
                             <thead class=" text-primary">
                             <tr>
-                                <th>@lang('messages.image')</th>
-                                <th>@lang('messages.title')</th>
-                                <th>@lang('messages.url')</th>
+                                <th>@lang('messages.team1')</th>
+                                <th>@lang('messages.team2')</th>
+                                <th>@lang('messages.score')</th>
                                 <th>@lang('messages.edit')</th>
                                 <th>@lang('messages.delete')</th>
                             </tr>
@@ -32,12 +32,16 @@
                             @foreach ($scores as $score)
                                 <tr>
                                     <td>
-                                        <img src="{{ $score->imageUrl }}" style="width:100px;"/>
+                                        @foreach($score->language as $type)
+                                            {{ $type->pivot->team1 }}
+                                        @endforeach
                                     </td>
-                                    <td>{{ $score->title }}</td>
-                                    <td>{{ $score->url }}</td>
+                                    <td> @foreach($score->language as $type)
+                                            {{ $type->pivot->team2 }}
+                                        @endforeach</td>
+                                    <td>{{ $score->team1goals }} - {{ $score->team2goals }}</td>
 
-                                    <td><span class="time"><a href="{{ route('sliders.edit', $slider->id) }}"
+                                    <td><span class="time"><a href="{{ route('sliders.edit', $score->id) }}"
                                                               class="btn btn-info">@lang('partials.edit')</a></span>
                                     </td>
                                     <td>

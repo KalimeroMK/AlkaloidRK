@@ -57,19 +57,19 @@
                     </div>
                     <div class="col-6">
 
-                        <input id="name" class="form-control" type="number" name="team1score"
+                        <input id="name" class="form-control" type="number" name="team1goals"
                                placeholder="{{ trans('messages.team1score') }}"
-                               value="{{ old('team1score', $slider->team1score ?? null) }}"/>
+                               value="{{ old('team1goals', $score->team1goals ?? null) }}"/>
 
                     </div>
                     <div class="col-6">
-                        <input id="name" class="form-control" type="number" name="team2score"
+                        <input id="name" class="form-control" type="number" name="team2goals"
                                placeholder="{{ trans('messages.team2score') }}"
-                               value="{{ old('team2score', $slider->team2score ?? null) }}"/>
+                               value="{{ old('team2goals', $score->team2goals ?? null) }}"/>
 
                         <input id="name" class="form-control" type="date" name="date"
                                placeholder="{{ trans('messages.date') }}"
-                               value="{{ old('date', $slider->date ?? null) }}"/>
+                               value="{{ old('date', $score->date ?? null) }}"/>
 
                     </div>
                     <div class="form-actions">
