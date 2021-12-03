@@ -558,7 +558,7 @@
                                                 <div class="wrapper">
                                                     <div class="img-wrap">
                                                         <div class="player-number"><span>
-                                                                    {{ $team->birthday }}
+                                                                {{ $diff = Carbon\Carbon::parse($team->birthday)->diffForHumans(Carbon\Carbon::now()) }}
                                                                 </span>
                                                         </div>
                                                         <div class="bio"><span><a
@@ -572,7 +572,11 @@
                                                     <div class="info">
                                                         <div class="name">
                                                             <h3>
-                                                                <a href="{{ route('player', $team->slug) }}"></a>
+                                                                <a href="{{ route('player', $team->slug) }}">@foreach($team->language as $type)
+                                                                        {{ $type->pivot->name }}@foreach($team->language as $type)
+                                                                            {{ $type->pivot->lastname }}
+                                                                        @endforeach
+                                                                    @endforeach </a>
                                                             </h3>
                                                         </div>
                                                         <div class="position"> @foreach($team->language as $type)
