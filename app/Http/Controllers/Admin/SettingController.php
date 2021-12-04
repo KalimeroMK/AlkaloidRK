@@ -1,87 +1,145 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+    namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Setting\Store;
-use App\Http\Requests\Setting\Update;
-use App\Models\Setting;
-use App\Traits\ImageUpload;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\JsonResponse;
-use Illuminate\View\View;
-use Session;
+    use App\Http\Controllers\Controller;
+    use App\Http\Requests\Setting\Store;
+    use App\Http\Requests\Setting\Update;
+    use App\Models\Language;
+    use App\Models\Setting;
+    use App\Traits\ImageUpload;
+    use Illuminate\Contracts\Foundation\Application;
+    use Illuminate\Contracts\View\Factory;
+    use Illuminate\Http\RedirectResponse;
+    use Illuminate\View\View;
+    use Session;
 
-class SettingController extends Controller
-{
-    use ImageUpload;
-
-    /**
-     * SettingController constructor.
-     */
-    public function __construct()
+    class SettingController extends Controller
     {
-        parent::__construct();
-        $this->middleware('permission:settings-list');
-        $this->middleware('permission:settings-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:settings-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:settings-delete', ['only' => ['destroy']]);
-    }
+        use ImageUpload;
 
-    /**
-     * @return Factory|View
-     */
-    public function index()
-    {
-        return view('admin.settings.index', ['settings' => Setting::all()]);
-    }
+        /**
+         * SettingController constructor.
+         */
+        public function __construct()
+        {
+            parent::__construct();
+            $this->middleware('permission:settings-list');
+            $this->middleware('permission:settings-create', ['only' => ['create', 'store']]);
+            $this->middleware('permission:settings-edit', ['only' => ['edit', 'update']]);
+            $this->middleware('permission:settings-delete', ['only' => ['destroy']]);
+        }
 
-    /**
-     * @return Factory|View
-     */
-    public function create()
-    {
-        $setting = new Setting();
-        return view('admin.settings.create', compact('setting'));
-    }
+        /**
+         * @return Factory|View
+         */
+        public function index()
+        {
+            $languages = Language::all();
+            $setting   = Setting::with([
+                'language' => function ($query) {
+                    $query->where('languages.code', $this->lang());
+                },
+            ])
+                                ->findOrNew(1);
 
-    /**
-     * @param Store $request
-     * @return string
-     */
-    public function store(Store $request): string
-    {
-        $setting = Setting::create(
-            $request->except('image') + [
-                'featured_image' => $this->verifyAndStoreImage($request)
-            ]
-        );
-        Session::flash('success_msg', trans('messages.settings_updated_success'));
-        return route('settings.index', $setting);
-    }
+            return view('admin.settings.index', compact('setting', 'languages'));
+        }
 
-    /**
-     * @param Setting $setting
-     * @return string
-     */
-    public function edit(Setting $setting): string
-    {
-        return route('settings.index', $setting);
-    }
+        /**
+         * @return Factory|View
+         */
+        public function create()
+        {
+            $setting   = new Setting();
+            $languages = Language::all();
 
-    /**
-     * @param Update $request
-     * @param Setting $setting
-     * @return JsonResponse
-     */
-    public function update(Update $request, Setting $setting): JsonResponse
-    {
-        $setting->update(
-            $request->except('image') + [
-                'featured_image' => $this->verifyAndStoreImage($request)
-            ]
-        );
-        Session::flash('success_msg', trans('messages.settings_updated_success'));
-        return response()->json($setting);
+            return view('admin.settings.create', compact('setting', 'languages'));
+        }
+
+        /**
+         * @param  Store  $request
+         *
+         * @return string
+         */
+        public function store(Store $request): string
+        {
+            $setting = Setting::create(
+                $request->except('featured_image', 'title', 'description', 'address') + [
+                    'featured_image' => $this->verifyAndStoreImage($request),
+                ]
+            );
+            $setting->language()->attach($this->pivotData($request));
+
+            Session::flash('success_msg', trans('messages.settings_updated_success'));
+
+            return redirect()->route('settings.edit', $setting);
+        }
+
+        /**
+         * @param  Setting  $setting
+         *
+         * @return Application|Factory|\Illuminate\Contracts\View\View
+         */
+        public function edit(Setting $setting)
+        {
+            $languages = Language::all();
+
+            return view('admin.settings.edit', compact('setting', 'languages'));
+        }
+
+        /**
+         * @param  Update  $request
+         * @param  Setting  $setting
+         *
+         * @return RedirectResponse
+         */
+        public function update(Update $request, Setting $setting): RedirectResponse
+        {
+            $setting->update(
+                $request->except('featured_image', 'title', 'description', 'address') + [
+                    'featured_image' => $this->verifyAndStoreImage($request),
+                ]
+            );
+            $setting->language()->sync($this->pivotData($request), true);
+
+            Session::flash('success_msg', trans('messages.settings_updated_success'));
+
+            return redirect()->route('settings.edit', $setting);
+        }
+
+        /**
+         * @param $request
+         *
+         * @return array
+         */
+        public function pivotData($request): array
+        {
+            $sync_data = [];
+            for ($i = 0, $iMax = count($request['title']); $i < $iMax; $i++) {
+                $sync_data[$request['title'][$i]] = [
+                    'title'       => $request['title'][$i],
+                    'description' => $request['description'][$i],
+                    'address'     => $request['address'][$i],
+                    'language_id' => $request['language_id'][$i],
+
+                ];
+            }
+
+            return $sync_data;
+        }
+
+        /**
+         * Make paths for storing images.
+         *
+         * @return object
+         */
+        public function makePaths(): object
+        {
+            $original  = public_path().'/uploads/images/logo/';
+            $thumbnail = public_path().'/uploads/images/logo/thumbnails/';
+            $medium    = public_path().'/uploads/images/logo/medium/';
+
+            return (object) compact('original', 'thumbnail', 'medium');
+        }
     }
-}

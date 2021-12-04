@@ -9,6 +9,12 @@
                         <p>{{trans('messages.dashboard')}}</p>
                     </a>
                 </li>
+                <li class="nav-item {{ Route::currentRouteNamed('settings.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('settings.index') }}">
+                        <i class="material-icons">settings</i>
+                        <span class="title">{{trans('messages.settings')}}</span>
+                    </a>
+                </li>
                 <li class="nav-item {{ Route::currentRouteNamed('categories.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('categories.index')}}">
                         <i class="material-icons">library_books</i>

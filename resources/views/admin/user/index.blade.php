@@ -14,7 +14,7 @@
                         <table class="table">
                             <thead class=" text-primary">
                             <tr>
-                                <th>{{trans('messages.`name`')}}</th>
+                                <th>{{trans('messages.name')}}</th>
                                 <th>{{trans('messages.email')}}</th>
                                 <th>{{trans('messages.role')}}</th>
                                 <th width="280px">Action</th>

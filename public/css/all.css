@@ -23731,6 +23731,7 @@ select.bs-select-hidden, select.selectpicker {
         display: none !important
     }
 }
+
 ul.tree, ul.tree ul {
     list-style: none;
     margin: 0;
@@ -23845,4 +23846,9 @@ ul.tree li:last-child:before {
 
 .sidebar[data-background-color=black] {
     background: #191919;
+}
+
+#map-canvas {
+    height: 400px;
+    width: 100%;
 }

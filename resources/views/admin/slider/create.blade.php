@@ -5,9 +5,9 @@
         <div class="content" style="margin-top: 7%">
             <div class="card">
                 <div class="card-header card-header-primary">
-                    <h4 class="card-title "> {{trans('messages.ads_section')}}</h4>
+                    <h4 class="card-title "> {{trans('messages.slider')}}</h4>
                     <p class="card-category"><a href="{{ route('dashboard')}}">{{trans('messages.home')}}</a> -> <a
-                                href="{{route('sliders.index')}}">{{trans('messages.ads_section')}}</a></p>
+                                href="{{route('sliders.index')}}">{{trans('messages.slider')}}</a></p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
