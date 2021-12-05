@@ -24,7 +24,13 @@
         public function rules(): array
         {
             return [
-                //
+                'team1.*'    => 'required|string',
+                'team2.*'    => 'required|string',
+                'team1goals' => 'required|integer',
+                'team2goals' => 'required|integer',
+                'team1logo'  => 'required|image',
+                'team2logo'  => 'required|image',
+                'date'       => 'required|date|after:yesterday',
             ];
         }
     }

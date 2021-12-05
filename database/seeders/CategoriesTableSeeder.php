@@ -43,7 +43,7 @@
                 2 =>
                     [
                         'id'         => 3,
-                        'slug'       => 'рegruter',
+                        'slug'       => 'regruter',
                         'title'      => 'Регрутер',
                         'parent_id'  => null,
                         '_lft'       => 1,
@@ -77,7 +77,7 @@
                     [
                         'id'         => 6,
                         'slug'       => 'news',
-                        'title'      => 'Vesti',
+                        'title'      => 'Вести',
                         'parent_id'  => null,
                         '_lft'       => 1,
                         '_rgt'       => 2,

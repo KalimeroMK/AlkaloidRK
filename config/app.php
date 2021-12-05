@@ -151,6 +151,7 @@
             Collective\Html\HtmlServiceProvider::class,
             Laravel\Socialite\SocialiteServiceProvider::class,
 
+            App\Providers\ViewServiceProvider::class,
         ],
 
         /*

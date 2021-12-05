@@ -7,6 +7,7 @@
     use App\Models\Category;
     use App\Models\Gallery;
     use App\Models\Post;
+    use App\Models\Score;
     use App\Models\Slider;
     use App\Models\Team;
     use App\Models\Youtube;
@@ -31,33 +32,39 @@
         {
             $sliders = Slider::all()->take(3);
             $youtube = Youtube::get()->last();
-            $teams = Team::with([
-                'language' => function($query) {
+            $teams   = Team::with([
+                'language' => function ($query) {
                     $query->where('languages.code', $this->lang());
                 },
             ])
-                ->paginate(8);
+                           ->paginate(8);
+            $score   = Score::with([
+                'language' => function ($query) {
+                    $query->where('languages.code', $this->lang());
+                },
+            ])
+                            ->latest()->first();;
+            $scores = Score::with([
+                'language' => function ($query) {
+                    $query->where('languages.code', $this->lang());
+                },
+            ])
+                           ->paginate(8);;
             $category = Category::whereSlug('news')->firstOrFail();
-            $news = Post::whereHas('categories', static function($q) use ($category) {
+            $news     = Post::whereHas('categories', static function ($q) use ($category) {
                 $q->where('title', '=', $category->title);
             })->with([
-                'language' => function($query) {
+                'language' => function ($query) {
                     $query->where('languages.code', $this->lang());
                 },
             ])->take(2)->get();
-            return view('theme.index', compact('sliders', 'youtube', 'teams', 'news'));
-        }
 
-        /**
-         * @return Application|Factory|View
-         */
-        public function contact()
-        {
-            return view('theme.contact');
+            return view('theme.index', compact('sliders', 'youtube', 'teams', 'news', 'score', 'scores'));
         }
 
         /**
          * @param  SendRequest  $request
+         *
          * @return RedirectResponse
          */
         public function contactPost(SendRequest $request): RedirectResponse
@@ -79,31 +86,44 @@
 
         /**
          * @param $slug
+         *
          * @return Application|Factory|View
          */
         public function productCat($slug)
         {
             $category = Category::whereSlug($slug)->firstOrFail();
-            $posts = Post::whereHas('categories', static function($q) use ($category) {
+            $posts    = Post::whereHas('categories', static function ($q) use ($category) {
                 $q->where('title', '=', $category->title);
             })->paginate(10);
+            if ($slug === 'galleries') {
+                return view('theme.gallery', compact('category', 'posts'));
+            }
+            if ($slug === 'regruter') {
+                return view('theme.contact');
+            }
+
+            if ($slug === 'kl7') {
+                return view('theme.kl7', compact('category', 'posts'));
+            }
 
             return view('theme.category', compact('posts'));
         }
 
         /**
          * @param $slug
+         *
          * @return Application|Factory|View
          */
         public function postDetails($slug)
         {
-            $post = Post::whereSlug($slug)->firstOrFail();
-            $related = Post::whereHas('tags', static function($q) use ($post) {
+            $post    = Post::whereSlug($slug)->firstOrFail();
+            $related = Post::whereHas('tags', static function ($q) use ($post) {
                 return $q->whereIn('title', $post->tags->pluck('title'));
             })
-                ->where('id', '!=', $post->id) // So you won't fetch same product
-                ->take(4)->get();
+                           ->where('id', '!=', $post->id) // So you won't fetch same product
+                           ->take(4)->get();
             $sliders = Gallery::wherePostId($post->id)->get();
+
             return view('theme.postDetails', compact('post', 'related', 'sliders'));
         }
 
@@ -117,64 +137,38 @@
 
         /**
          * @param $slug
-         * @return Application|Factory|View
-         */
-        public function gallery($slug)
-        {
-            $category = Category::whereSlug($slug)->firstOrFail();
-            $posts = Post::whereHas('categories', static function($q) use ($category) {
-                $q->where('title', '=', $category->title);
-            })->paginate(12);
-            return view('theme.gallery', compact('category', 'posts'));
-        }
-
-        /**
-         * @param $slug
+         *
          * @return Application|Factory|View
          */
         public function galleriesDetails($slug)
         {
-            $post = Post::whereSlug($slug)->firstOrFail();
+            $post    = Post::whereSlug($slug)->firstOrFail();
             $sliders = Gallery::wherePostId($post->id)->get();
+
             return view('theme.galleryDetails', compact('sliders', 'post'));
         }
 
         /**
          * @param $slug
-         * @return Application|Factory|View
-         */
-        public function kl7($slug)
-        {
-            $category = Category::whereSlug($slug)->firstOrFail();
-            $posts = Post::whereHas('categories', static function($q) use ($category) {
-                $q->where('title', '=', $category->title);
-            })->with([
-                'language' => function($query) {
-                    $query->where('languages.code', $this->lang());
-                },
-            ])->paginate(12);
-            return view('theme.kl7', compact('category', 'posts'));
-        }
-
-        /**
-         * @param $slug
+         *
          * @return Application|Factory|View
          */
         public function playerDetails($slug)
         {
             $team = Team::whereSlug($slug)->with([
-                'language' => function($query) {
+                'language' => function ($query) {
                     $query->where('languages.code', $this->lang());
                 },
             ])->firstOrFail();
 
             $related = Team::with([
-                'language' => function($query) {
+                'language' => function ($query) {
                     $query->where('languages.code', $this->lang());
                 },
             ])
-                ->where('id', '!=', $team->id) // So you won't fetch same product
-                ->take(8)->get();
+                           ->where('id', '!=', $team->id) // So you won't fetch same product
+                           ->take(8)->get();
+
             return view('theme.playerDetails', compact('team', 'related'));
         }
     }

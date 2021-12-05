@@ -21,10 +21,10 @@
          */
         public function __construct()
         {
-            $this->middleware('permission:post-list');
-            $this->middleware('permission:post-create', ['only' => ['create', 'store']]);
-            $this->middleware('permission:post-edit', ['only' => ['edit', 'update']]);
-            $this->middleware('permission:post-delete', ['only' => ['destroy']]);
+            $this->middleware('permission:team-list');
+            $this->middleware('permission:team-create', ['only' => ['create', 'store']]);
+            $this->middleware('permission:team-edit', ['only' => ['edit', 'update']]);
+            $this->middleware('permission:team-delete', ['only' => ['destroy']]);
         }
 
         use ImageUpload;
@@ -35,11 +35,12 @@
         public function index()
         {
             $teams = Team::with([
-                'language' => function($query) {
+                'language' => function ($query) {
                     $query->where('languages.code', $this->lang());
                 },
             ])
-                ->paginate(12);
+                         ->paginate(12);
+
             return view('admin.team.index', compact('teams'));
         }
 
@@ -48,13 +49,15 @@
          */
         public function create()
         {
-            $team = new Team();
+            $team      = new Team();
             $languages = Language::all();
+
             return view('admin.team.create', compact('team', 'languages'));
         }
 
         /**
          * @param  StoreTeamRequest  $request
+         *
          * @return RedirectResponse
          */
         public function store(StoreTeamRequest $request): RedirectResponse
@@ -68,22 +71,26 @@
             $team->language()->attach($this->pivotData($request));
 
             Session::flash('success_msg', trans('messages.post_created_success'));
+
             return redirect()->route('teams.edit', $team);
         }
 
         /**
          * @param  Team  $team
+         *
          * @return Factory|Application|\Illuminate\Contracts\View\View
          */
         public function edit(Team $team)
         {
             $languages = Language::all();
+
             return view('admin.team.edit', compact('team', 'languages'));
         }
 
         /**
          * @param  UpdateTeamRequest  $request
          * @param  Team  $team
+         *
          * @return RedirectResponse
          */
         public function update(UpdateTeamRequest $request, Team $team): RedirectResponse
@@ -101,22 +108,26 @@
             $team->language()->sync($this->pivotData($request), true);
 
             Session::flash('error_msg', trans('messages.post_not_found'));
+
             return redirect()->route('teams.edit', $team);
         }
 
         /**
          * @param  Team  $team
+         *
          * @return RedirectResponse
          */
         public function destroy(Team $team): RedirectResponse
         {
             $team->delete();
             Session::flash('success_msg', trans('messages.post_deleted_success'));
+
             return redirect()->route('teams.index');
         }
 
         /**
          * @param $request
+         *
          * @return array
          */
         public function pivotData($request): array
@@ -132,6 +143,7 @@
                     'language_id' => $request['language_id'][$i],
                 ];
             }
+
             return $sync_data;
         }
 
@@ -142,10 +154,11 @@
          */
         public function makePaths(): object
         {
-            $original = public_path() . '/uploads/images/teams/';
-            $thumbnail = public_path() . '/uploads/images/teams/thumbnails/';
-            $medium = public_path() . '/uploads/images/teams/medium/';
-            return (object)compact('original', 'thumbnail', 'medium');
+            $original  = public_path().'/uploads/images/teams/';
+            $thumbnail = public_path().'/uploads/images/teams/thumbnails/';
+            $medium    = public_path().'/uploads/images/teams/medium/';
+
+            return (object) compact('original', 'thumbnail', 'medium');
         }
 
     }

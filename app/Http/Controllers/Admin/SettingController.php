@@ -14,6 +14,8 @@
     use Illuminate\View\View;
     use Session;
 
+    use function PHPUnit\Framework\isNull;
+
     class SettingController extends Controller
     {
         use ImageUpload;
@@ -41,7 +43,12 @@
                     $query->where('languages.code', $this->lang());
                 },
             ])
-                                ->findOrNew(1);
+                                ->first();
+            if (isNull($setting)) {
+                $setting = new Setting();
+
+                return view('admin.settings.create', compact('setting', 'languages'));
+            }
 
             return view('admin.settings.index', compact('setting', 'languages'));
         }
@@ -96,11 +103,16 @@
          */
         public function update(Update $request, Setting $setting): RedirectResponse
         {
-            $setting->update(
-                $request->except('featured_image', 'title', 'description', 'address') + [
-                    'featured_image' => $this->verifyAndStoreImage($request),
-                ]
-            );
+            if ($request->hasFile('featured_image',)) {
+                $setting->update(
+                    $request->except('featured_image', 'title', 'description') + [
+                        'featured_image' => $this->verifyAndStoreImage($request),
+                    ]
+                );
+            } else {
+                $setting->update($request->except('title', 'description', 'featured_image'));
+            }
+
             $setting->language()->sync($this->pivotData($request), true);
 
             Session::flash('success_msg', trans('messages.settings_updated_success'));

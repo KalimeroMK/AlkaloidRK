@@ -41,8 +41,8 @@
                                         @endforeach</td>
                                     <td>{{ $score->team1goals }} - {{ $score->team2goals }}</td>
 
-                                    <td><span class="time"><a href="{{ route('sliders.edit', $score->id) }}"
-                                                              class="btn btn-info">@lang('partials.edit')</a></span>
+                                    <td><span class="time"><a href="{{ route('scores.edit', $score->id) }}"
+                                                              class="btn btn-info">@lang('messages.edit')</a></span>
                                     </td>
                                     <td>
                                         <form method="POST" action="{{route('scores.destroy',$score)}}">
@@ -50,7 +50,7 @@
                                             @method('delete')
                                             <button class="btn btn-danger "
                                                     data-id={{$score['id']}} data-placement="bottom"
-                                                    title="Delete">@lang('partials.delete')
+                                                    title="Delete">@lang('messages.delete')
                                             </button>
                                         </form>
                                     </td>

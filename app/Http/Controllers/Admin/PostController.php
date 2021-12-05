@@ -38,13 +38,14 @@
         public function index()
         {
             $posts = Post::with('category')
-                ->orderBy('id', 'asc')
-                ->with([
-                    'language' => function($query) {
-                        $query->where('languages.code', $this->lang());
-                    },
-                ])
-                ->paginate(12);
+                         ->orderBy('id', 'asc')
+                         ->with([
+                             'language' => function ($query) {
+                                 $query->where('languages.code', $this->lang());
+                             },
+                         ])
+                         ->paginate(12);
+
             return view('admin.posts.index', compact('posts'));
         }
 
@@ -53,15 +54,17 @@
          */
         public function create()
         {
-            $post = new Post();
+            $post       = new Post();
             $categories = Category::all();
-            $languages = Language::all();
-            $tag = Tag::all();
+            $languages  = Language::all();
+            $tag        = Tag::all();
+
             return view('admin.posts.create', compact('categories', 'post', 'tag', 'languages'));
         }
 
         /**
          * @param  Store  $request
+         *
          * @return RedirectResponse
          */
         public function store(Store $request): RedirectResponse
@@ -77,24 +80,28 @@
             $post->categories()->attach($request->category);
 
             Session::flash('success_msg', trans('messages.post_created_success'));
+
             return redirect()->route('posts.edit', $post);
         }
 
         /**
          * @param  Post  $post
+         *
          * @return Factory|Application|\Illuminate\Contracts\View\View
          */
         public function edit(Post $post)
         {
-            $tag = Tag::all();
-            $languages = Language::all();
+            $tag        = Tag::all();
+            $languages  = Language::all();
             $categories = Category::all();
+
             return view('admin.posts.edit', compact('post', 'categories', 'tag', 'languages'));
         }
 
         /**
          * @param  Update  $request
          * @param  Post  $post
+         *
          * @return RedirectResponse
          */
         public function update(Update $request, Post $post): RedirectResponse
@@ -107,18 +114,20 @@
                     ]
                 );
             } else {
-                $post->update($request->except('title', 'description'));
+                $post->update($request->except('title', 'description', 'featured_image'));
             }
             $post->language()->sync($this->pivotData($request), true);
             $post->tags()->sync($request->tags, true);
             $post->categories()->sync($request->category, true);
 
             Session::flash('error_msg', trans('messages.post_not_found'));
+
             return redirect()->route('posts.edit', $post);
         }
 
         /**
          * @param  Post  $post
+         *
          * @return RedirectResponse
          * @throws Exception
          */
@@ -126,11 +135,13 @@
         {
             $post->delete();
             Session::flash('success_msg', trans('messages.post_deleted_success'));
+
             return redirect()->route('posts.index');
         }
 
         /**
          * @param $request
+         *
          * @return array
          */
         public function pivotData($request): array
@@ -143,6 +154,7 @@
                     'language_id' => $request['language_id'][$i],
                 ];
             }
+
             return $sync_data;
         }
 
@@ -153,10 +165,11 @@
          */
         public function makePaths(): object
         {
-            $original = public_path() . '/uploads/images/posts/';
-            $thumbnail = public_path() . '/uploads/images/posts/thumbnails/';
-            $medium = public_path() . '/uploads/images/posts/medium/';
-            return (object)compact('original', 'thumbnail', 'medium');
+            $original  = public_path().'/uploads/images/posts/';
+            $thumbnail = public_path().'/uploads/images/posts/thumbnails/';
+            $medium    = public_path().'/uploads/images/posts/medium/';
+
+            return (object) compact('original', 'thumbnail', 'medium');
         }
 
     }

@@ -25,32 +25,33 @@
                 <a class="tm-logo uk-float-left" href="{{ route('indexFront') }}">
                     <img src="{{ asset('theme/images/logo-img.png') }}" alt="logo" title="logo" class="logoBall">
                 </a>
-
                 <ul class="uk-navbar-nav uk-hidden-small">
-                    <li class="uk-parent "
-                        data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true"
-                        aria-expanded="false"><a href="/">Home</a></li>
-                    <li class="{{ Route::currentRouteNamed('about_us') ? 'uk-active' : '' }}"
-                        data-uk-dropdown="{'preventflip':'y'}" aria-haspopup="true" aria-expanded="false"><a
-                                href="{{ route('about_us') }}">@lang('partials.team')</a></li>
-                    <li class="{{ Route::currentRouteNamed('/') ? 'uk-active' : '' }}"><a
-                                href="{{ route('galleries', 'galleries') }}">@lang('messages.gallery')</a>
-                    </li>
-                    <li class="{{ Route::currentRouteNamed('contact') ? 'uk-active' : '' }}"><a
-                                href="{{ route('contact') }}">@lang('partials.recruiter')</a>
-                    </li>
-                    <li class="{{ Route::currentRouteNamed('/') ? 'uk-active' : '' }}"><a
-                                href="category.html">@lang('partials.tv')</a>
-                    </li>
-                    <li class="{{ Route::currentRouteNamed('kl7') ? 'uk-active' : '' }}"><a
-                                href="{{ route('kl7','kl7') }}">@lang('partials.KL7')</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/en') }}"><img
-                                    src="{{ asset('images/en-flag-hover.jpg') }}" alt="image">
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/mk') }}"><img
-                                    src="{{ asset('images/mk-flag-hover.jpg') }}" alt="image">
-                        </a></li>
+                    @foreach ($categories as $category)
+                        <li class="nav-item dropdown ">
+                            <a href="{{ route('categories', $category->slug) }}" id="mainNavHome"
+                               class="nav-link dropdown-toggle js-stoppropag" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                {{ $category->title }}
+                            </a>
+                            @foreach ($category->childrenCategories as $childCategory)
+                                <div aria-labelledby="mainNavHome"
+                                     class="dropdown-menu dropdown-menu-clean dropdown-menu-hover">
+                                    <ul class="list-unstyled m-0 p-0">
+                                        @include('theme.partials.child_category', ['child_category' =>
+                                        $childCategory])
+                                    </ul>
+                                </div>
+                            @endforeach
+                        </li>
+                        @endforeach
+                        </li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/en') }}"><img
+                                        src="{{ asset('images/en-flag-hover.jpg') }}" alt="image">
+                            </a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/mk') }}"><img
+                                        src="{{ asset('images/mk-flag-hover.jpg') }}" alt="image">
+                            </a>
+                        </li>
                 </ul>
                 <a href="/#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
             </div>
