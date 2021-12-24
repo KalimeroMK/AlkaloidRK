@@ -43,15 +43,23 @@
                                 </div>
                             @endforeach
                         </li>
-                        @endforeach
-                        </li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/en') }}"><img
-                                        src="{{ asset('images/en-flag-hover.jpg') }}" alt="image">
-                            </a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/mk') }}"><img
-                                        src="{{ asset('images/mk-flag-hover.jpg') }}" alt="image">
-                            </a>
-                        </li>
+                    @endforeach
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('en') }}"><img
+                                    src="{{ asset('images/en-flag-hover.jpg') }}" alt="image">
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('mk') }}"><img
+                                    src="{{ asset('images/mk-flag-hover.jpg') }}" alt="image">
+                        </a>
+                    </li>
+                    {{--                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)--}}
+                    {{--                        <li>--}}
+                    {{--                            <a rel="alternate" hreflang="{{ $localeCode }}"--}}
+                    {{--                               href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">--}}
+                    {{--                                {{ $properties['native'] }}--}}
+                    {{--                            </a>--}}
+                    {{--                        </li>--}}
+                    {{--                    @endforeach--}}
+                </ul>
                 </ul>
                 <a href="/#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
             </div>

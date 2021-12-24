@@ -22,7 +22,6 @@
          */
         public function __construct()
         {
-            parent::__construct();
             $this->middleware('permission:categories-list');
             $this->middleware('permission:categories-create', ['only' => ['create', 'store']]);
             $this->middleware('permission:categories-edit', ['only' => ['edit', 'update']]);
@@ -40,6 +39,7 @@
             if (is_null($categories)) {
                 return redirect()->route('categories.create');
             }
+
             return view('admin.categories.index', compact('categories'));
         }
 
@@ -51,8 +51,8 @@
         public function create()
         {
             $categories = Category::getTree();
-            $category = new Category();
-            $languages = Language::all();
+            $category   = new Category();
+            $languages  = Language::all();
 
             return view('admin.categories.create', compact('categories', 'category', 'languages'));
         }
@@ -61,19 +61,22 @@
          * Store a newly created resource in storage.
          *
          * @param  Store  $request
+         *
          * @return RedirectResponse
          */
         public function store(Store $request): RedirectResponse
         {
-            $title = $request['title'];
+            $title     = $request['title'];
             $parent_id = $request['parent_id'];
-            if (!is_null($parent_id)) {
+            if ( ! is_null($parent_id)) {
                 $category = Category::create(["title" => $title, "parent_id" => $parent_id]);
                 Session::flash('flash_message', 'Category successfully created!');
+
                 return redirect()->route('categories.edit', $category);
             }
             $category = Category::create(["title" => $title]);
             Session::flash('flash_message', 'Category successfully created!');
+
             return redirect()->route('categories.edit', $category);
         }
 
@@ -81,12 +84,14 @@
          * Show the form for editing the specified resource.
          *
          * @param  Category  $category
+         *
          * @return Application|Factory|View
          */
         public function edit(Category $category)
         {
-            $languages = Language::all();
+            $languages  = Language::all();
             $categories = Category::getTree();
+
             return view('admin.categories.edit', compact('category', 'categories', 'languages'));
         }
 
@@ -95,12 +100,14 @@
          *
          * @param  Update  $request
          * @param  Category  $category
+         *
          * @return RedirectResponse
          */
         public function update(Update $request, Category $category): RedirectResponse
         {
             $category->update($request->all());
             Session::flash('flash_message', 'Category successfully created!');
+
             return redirect()->back();
         }
 
@@ -108,6 +115,7 @@
          * Remove the specified resource from storage.
          *
          * @param  Category  $category
+         *
          * @return RedirectResponse
          * @throws Exception
          */
@@ -115,11 +123,13 @@
         {
             $category->delete();
             Session::flash('flash_message', 'Category successfully deleted!');
+
             return redirect()->route('categories.index');
         }
 
         /**
          * @param $request
+         *
          * @return array
          */
         public function pivotData($request): array
@@ -131,6 +141,7 @@
                     'language_id' => $request['language_id'][$i],
                 ];
             }
+
             return $sync_data;
         }
 

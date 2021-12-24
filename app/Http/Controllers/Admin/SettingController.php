@@ -25,7 +25,6 @@
          */
         public function __construct()
         {
-            parent::__construct();
             $this->middleware('permission:settings-list');
             $this->middleware('permission:settings-create', ['only' => ['create', 'store']]);
             $this->middleware('permission:settings-edit', ['only' => ['edit', 'update']]);

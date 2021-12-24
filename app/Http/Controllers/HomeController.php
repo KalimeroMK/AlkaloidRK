@@ -16,14 +16,9 @@
     use Illuminate\Contracts\View\View;
     use Illuminate\Http\RedirectResponse;
     use Illuminate\Support\Facades\Mail;
-    use Illuminate\Support\Facades\Session;
 
     class HomeController extends Controller
     {
-        public function lang()
-        {
-            return Session::get('locale');
-        }
 
         /**
          * @return Application|Factory|View

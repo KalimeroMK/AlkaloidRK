@@ -59,8 +59,8 @@
         protected function mapApiRoutes()
         {
             Route::prefix('api')
-                ->middleware('api')
-                ->group(base_path('routes/api.php'));
+                 ->middleware('api')
+                 ->group(base_path('routes/api.php'));
         }
 
         /**
@@ -69,7 +69,7 @@
         public function mapAdminRoutes()
         {
             Route::middleware(['web', 'auth', '2fa'])
-                ->group(base_path('routes/admin.php'));
+                 ->group(base_path('routes/admin.php'));
         }
 
         /**
@@ -78,8 +78,8 @@
         public function map2faRoutes()
         {
             Route::middleware(['web', 'auth'])
-                ->prefix('2fa')
-                ->group(base_path('routes/2fa.php'));
+                 ->prefix('2fa')
+                 ->group(base_path('routes/2fa.php'));
         }
 
         /**
@@ -92,6 +92,6 @@
         protected function mapWebRoutes()
         {
             Route::middleware(['web'])
-                ->group(base_path('routes/web.php'));
+                 ->group(base_path('routes/web.php'));
         }
     }

@@ -107,7 +107,6 @@
                            placeholder="{{ trans('messages.date') }}"
                            value="{{ old('date', $score->date ?? null) }}"/>
                 </div>
-                </div>
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-offset-3 col-md-9" style="margin-top: 2%">

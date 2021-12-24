@@ -12,6 +12,7 @@
     use App\Http\Middleware\TrustProxies;
     use App\Http\Middleware\VerifyCsrfToken;
     use Fruitcake\Cors\HandleCors;
+    use ied3vil\LanguageSwitcher\Middleware\LanguageSwitcherMiddleware;
     use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
     use Illuminate\Auth\Middleware\Authorize;
     use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
@@ -91,7 +92,11 @@
             'role'             => RoleMiddleware::class,
             'permission'       => PermissionMiddleware::class,
             '2fa'              => LoginSecurityMiddleware::class,
-            Localization::class,
-
+//            /**** OTHER MIDDLEWARE ****/
+//            'localize'              => LaravelLocalizationRoutes::class,
+//            'localizationRedirect'  => LaravelLocalizationRedirectFilter::class,
+//            'localeSessionRedirect' => LocaleSessionRedirect::class,
+//            'localeCookieRedirect'  => LocaleCookieRedirect::class,
+//            'localeViewPath'        => LaravelLocalizationViewPath::class,
         ];
     }

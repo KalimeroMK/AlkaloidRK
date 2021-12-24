@@ -24,7 +24,6 @@
          */
         public function __construct()
         {
-            parent::__construct();
             $this->middleware('permission:score-list');
             $this->middleware('permission:score-create', ['only' => ['create', 'store']]);
             $this->middleware('permission:score-edit', ['only' => ['edit', 'update']]);
