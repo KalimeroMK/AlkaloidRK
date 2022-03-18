@@ -1,9 +1,5 @@
 <?php
 
-use Spatie\ResponseCache\Hasher\DefaultHasher;
-use Spatie\ResponseCache\Replacers\CsrfTokenReplacer;
-use Spatie\ResponseCache\Serializers\DefaultSerializer;
-
 return [
     /*
      * Determine if the response cache middleware should be enabled.
@@ -50,7 +46,7 @@ return [
      * Each replacer must implement the Replacer interface.
      */
     'replacers' => [
-        CsrfTokenReplacer::class,
+        \Spatie\ResponseCache\Replacers\CsrfTokenReplacer::class,
     ],
 
     /*
@@ -66,10 +62,10 @@ return [
      * This class is responsible for generating a hash for a request. This hash
      * is used to look up an cached response.
      */
-    'hasher' => DefaultHasher::class,
+    'hasher' => \Spatie\ResponseCache\Hasher\DefaultHasher::class,
 
     /*
      * This class is responsible for serializing responses.
      */
-    'serializer' => DefaultSerializer::class,
+    'serializer' => \Spatie\ResponseCache\Serializers\DefaultSerializer::class,
 ];

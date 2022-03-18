@@ -2,8 +2,8 @@
 
     namespace Database\Factories;
 
-    use App\Models\LanguagePost;
     use Illuminate\Database\Eloquent\Factories\Factory;
+    use Modules\Language\Models\LanguagePost;
 
     class LanguagePostFactory extends Factory
     {

@@ -2,8 +2,8 @@
 
     namespace Database\Seeders;
 
-    use App\Models\User;
     use Illuminate\Database\Seeder;
+    use Modules\User\Models\User;
     use Spatie\Permission\Models\Permission;
     use Spatie\Permission\Models\Role;
     use Spatie\Permission\PermissionRegistrar;
@@ -124,32 +124,29 @@
             $role3->givePermissionTo(Permission::all());
 
             // create demo users
-            $user = User::factory()->create([
+            User::factory()->create([
                 'name'   => 'Example User',
                 'email'  => 'test@mail.com',
                 'avatar' => '/uploads/author-thumb.jpg',
                 'slug'   => 'example-user',
 
-            ]);
-            $user->assignRole($role1);
+            ])->assignRole($role1);
 
-            $user = User::factory()->create([
+            User::factory()->create([
                 'name'   => 'Example Admin User',
                 'email'  => 'admin@mail.com',
                 'avatar' => '/uploads/author-thumb.jpg',
                 'slug'   => 'example-admin-user',
 
-            ]);
-            $user->assignRole($role2);
+            ])->assignRole($role2);
 
-            $user = User::factory()->create([
+            User::factory()->create([
                 'name'   => 'Example Super-Admin User',
                 'email'  => 'superadmin@mail.com',
                 'avatar' => '/uploads/author-thumb.jpg',
                 'slug'   => 'example-super-admin-user',
 
-            ]);
-            $user->assignRole($role3);
+            ])->assignRole($role3);
         }
 
     }

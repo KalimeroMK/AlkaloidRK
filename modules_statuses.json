@@ -1,0 +1,16 @@
+{
+    "Category": true,
+    "Dashboard": true,
+    "Gallery": true,
+    "Home": true,
+    "Language": true,
+    "Post": true,
+    "Role": true,
+    "Score": true,
+    "Setting": true,
+    "Slider": true,
+    "Tag": true,
+    "User": true,
+    "Youtube": true,
+    "Team": true
+}

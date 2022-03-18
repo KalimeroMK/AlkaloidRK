@@ -2,8 +2,8 @@
 
     namespace Database\Factories;
 
-    use App\Models\CategoryPost;
     use Illuminate\Database\Eloquent\Factories\Factory;
+    use Modules\Category\Models\CategoryPost;
 
     class CategoryPostFactory extends Factory
     {

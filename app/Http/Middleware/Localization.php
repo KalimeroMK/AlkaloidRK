@@ -17,14 +17,10 @@
          *
          * @return mixed
          */
-        public function handle($request, Closure $next)
+        public function handle(Request $request, Closure $next): mixed
         {
-            if ( ! in_array(Session::get('locale'), ['en', 'mk', 'de'])) {
-                $locale = 'mk';
-                Session::put('locale', $locale);
-            }
             if (Session::has('locale')) {
-                App::setlocale(Session::get('locale'));
+                App::setLocale(Session::get('locale'));
             }
 
             return $next($request);

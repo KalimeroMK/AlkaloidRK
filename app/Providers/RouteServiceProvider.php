@@ -2,24 +2,30 @@
 
     namespace App\Providers;
 
+    use Illuminate\Cache\RateLimiting\Limit;
     use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+    use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\RateLimiter;
     use Illuminate\Support\Facades\Route;
 
     class RouteServiceProvider extends ServiceProvider
     {
         /**
+         * The path to the "home" route for your application.
          *
-         */
-        public const HOME = 'dashboard';
-
-        /**
-         * This namespace is applied to your controller routes.
-         *
-         * In addition, it is set as the URL generator's root namespace.
+         * This is used by Laravel authentication to redirect users after login.
          *
          * @var string
          */
-        protected $namespace = 'App\Http\Controllers';
+        public const HOME = '/home';
+
+        /**
+         * The controller namespace for the application.
+         *
+         * When present, controller route declarations will automatically be prefixed with this namespace.
+         *
+         * @var string|null
+         */
 
         /**
          * Define your route model bindings, pattern filters, etc.
@@ -28,70 +34,30 @@
          */
         public function boot()
         {
-            //
+            $this->configureRateLimiting();
 
-            parent::boot();
+            $this->routes(function () {
+                Route::prefix('api')
+                     ->middleware('api')
+                     ->group(base_path('routes/api.php'));
+
+                Route::middleware('web')
+                     ->group(base_path('routes/web.php'));
+
+                Route::middleware('web')
+                     ->group(base_path('routes/lang.php'));
+            });
         }
 
         /**
-         * Define the routes for the application.
+         * Configure the rate limiters for the application.
          *
          * @return void
          */
-        public function map()
+        protected function configureRateLimiting()
         {
-            $this->mapApiRoutes();
-
-            $this->mapAdminRoutes();
-
-            $this->map2faRoutes();
-
-            $this->mapWebRoutes();
-        }
-
-        /**
-         * Define the "api" routes for the application.
-         *
-         * These routes are typically stateless.
-         *
-         * @return void
-         */
-        protected function mapApiRoutes()
-        {
-            Route::prefix('api')
-                 ->middleware('api')
-                 ->group(base_path('routes/api.php'));
-        }
-
-        /**
-         * Define admin routes protected with auth middleware admin namespace used
-         */
-        public function mapAdminRoutes()
-        {
-            Route::middleware(['web', 'auth', '2fa'])
-                 ->group(base_path('routes/admin.php'));
-        }
-
-        /**
-         * Define 2fa routes protected with auth middleware admin namespace used
-         */
-        public function map2faRoutes()
-        {
-            Route::middleware(['web', 'auth'])
-                 ->prefix('2fa')
-                 ->group(base_path('routes/2fa.php'));
-        }
-
-        /**
-         * Define the "web" routes for the application.
-         *
-         * These routes all receive session state, CSRF protection, etc.
-         *
-         * @return void
-         */
-        protected function mapWebRoutes()
-        {
-            Route::middleware(['web'])
-                 ->group(base_path('routes/web.php'));
+            RateLimiter::for('api', function (Request $request) {
+                return Limit::perMinute(60)->by(optional($request->user())->id ? : $request->ip());
+            });
         }
     }

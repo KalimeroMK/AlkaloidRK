@@ -2,9 +2,9 @@
 
     namespace Database\Factories;
 
-    use App\Models\Category;
     use Illuminate\Database\Eloquent\Factories\Factory;
     use Illuminate\Support\Carbon;
+    use Modules\Category\Models\Category;
 
     class CategoryFactory extends Factory
     {

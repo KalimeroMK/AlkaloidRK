@@ -2,9 +2,9 @@
 
     namespace Database\Factories;
 
-    use App\Models\Gallery;
     use Illuminate\Database\Eloquent\Factories\Factory;
     use Illuminate\Support\Carbon;
+    use Modules\Gallery\Models\Gallery;
 
     class GalleryFactory extends Factory
     {
